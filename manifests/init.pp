@@ -36,8 +36,8 @@
 # Copyright 2014 Your name here, unless otherwise noted.
 #
 class racktables (
-  $vhost           = $racktables::params::vhost,
   $secretwriteable = $racktables::params::secretwriteable,
+  $vhost           = $racktables::params::vhost,
   $mysqlrootpw     = $racktables::params::mysqlrootpw,
   $mysqluser       = $racktables::params::mysqluser,
   $mysqluserpw     = $racktables::params::mysqluserpw,
@@ -51,8 +51,8 @@ class racktables (
 
 ) inherits racktables::params {
 
-  validate_string($vhost)
   validate_bool($secretwriteable)
+  validate_string($vhost)
   validate_string($mysqlrootpw)
   validate_string($mysqluser)
   validate_string($mysqluserpw)

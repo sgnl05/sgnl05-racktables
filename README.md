@@ -73,7 +73,7 @@ Proper installation with recommended parameters:
 
 ```puppet
     class { '::racktables':
-      secretwriteable => true,,
+      secretwriteable => true,
       vhost           => 'racktables.example.com',
       mysqlrootpw     => 'strongpassword123.XXXabc',
       mysqldb         => 'racktables',

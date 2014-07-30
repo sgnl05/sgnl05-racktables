@@ -15,65 +15,129 @@
 
 ## Overview
 
-A one-maybe-two sentence summary of what the module does/what problem it solves.
-This is your 30 second elevator pitch for your module. Consider including
-OS/Puppet version it works with.
+This Puppet module installs the latest development version of RackTables, along with Apache, PHP and MySQL.
 
 ## Module Description
 
-If applicable, this section should have a brief description of the technology
-the module integrates with and what that integration enables. This section
-should answer the questions: "What does this module *do*?" and "Why would I use
-it?"
+RackTables is nifty and robust solution for datacenter and server room asset management. It helps document hardware assets, network addresses, space in racks, networks configuration and much much more.
 
-If your module has a range of functionality (installation, configuration,
-management, etc.) this is the time to mention it.
+Use this module to install the latest development version of RackTables. The module will also install Apache, PHP, MySQL and some other dependencies for RackTables (php packages mostly).
+
+
+WARNING:
+This is not ment for production servers. Use this module on NEW servers for development or demo purposes only! 
+Exsisting Apache, MySQL and RackTables installations might/will be overwritten.
+
 
 ## Setup
 
 ### What racktables affects
 
-* A list of files, packages, services, or operations that the module will alter,
-  impact, or execute on the system it's installed on.
-* This is a great place to stick any warnings.
-* Can be in list or paragraph form.
+* Apache - Any exsisting config will be replaced or purged.
+* MySQL - Existing databases and settings might get overwritten.
 
-### Setup Requirements **OPTIONAL**
+### Beginning with RackTables module
 
-If your module requires anything extra before setting up (pluginsync enabled,
-etc.), mention it here.
+To install RackTables with the default parameters
 
-### Beginning with racktables
+```puppet
+    class { '::racktables':
+      secretwriteable => true,
+      vhost           => 'racktables.example.com',
+    }
+```
 
-The very basic steps needed for a user to get the module up and running.
+As soon as puppet is done installing, go to vhost address and append ?module=installer to the URL (Example URL: http://racktables.example.com/?module=installer). From there follow the RackTables installation steps, 7 in total.
 
-If your most recent release breaks compatibility or requires particular steps
-for upgrading, you may wish to include an additional section here: Upgrading
-(For an example, see http://forge.puppetlabs.com/puppetlabs/firewall).
+Default database settings are:
+* database: racktables_db
+* username: racktables_user
+* password: racktables_pass
 
-## Usage
+These values can be changed by adding parameters mysqldb, mysqluser and mysqluserpw to the ::racktables class (See more [examples](#examples)).
 
-Put the classes, types, and resources for customizing, configuring, and doing
-the fancy stuff with your module here.
+When you get to RackTables installation step 4 (of 7), remove the `secretwriteable` parameter from the ::racktables class (or set it to false). Next, re-run puppet and then finnish the rest of the installation steps.
+
+#### Examples
+
+Set a root password for your mysql installation (default password is "strongpassword" if undefined):
+
+```puppet
+    class { '::racktables':
+      secretwriteable => true,
+      mysqlrootpw     => 'change.me123XXXabc',
+      vhost           => 'racktables.example.com',
+    }
+```
+
+Proper installation with recommended parameters:
+
+```puppet
+    class { '::racktables':
+      secretwriteable => true,,
+      vhost           => 'racktables.example.com',
+      mysqlrootpw     => 'strongpassword123.XXXabc',
+      mysqldb         => 'racktables',
+      mysqluser       => 'racktables',
+      mysqluserpw     => 'otherstrongpasswordXXX123XXX.abc',
+      mysqlhost       => 'localhost',
+    }
+```
+
+When installations done, dont forget to set secretwriteable to false (or remove the whole parameter). You can also remove the mysqlrootpw parameter, as it is now stored in /root/.my.cnf on the local server.
+
+In other words, after installation is done your class should look like this:
+
+```puppet
+    class { '::racktables':
+      vhost           => 'racktables.example.com',
+      mysqldb         => 'racktables',
+      mysqluser       => 'racktables',
+      mysqluserpw     => 'otherstrongpasswordXXX123XXX.abc',
+      mysqlhost       => 'localhost',
+    }
+```
+
 
 ## Reference
 
-Here, list the classes, types, providers, facts, etc contained in your module.
-This section should include all of the under-the-hood workings of your module so
-people know what the module is touching on their system but don't need to mess
-with things. (We are working on automating this section!)
+###Classes
+
+####Public Classes
+
+* `racktables`: Starts the module and calls racktables::install, racktables::apache and racktables::mysql
+
+####Private Classes
+
+* `racktables::install`: Pulls and installs RackTables from https://github.com/RackTables/racktables.git
+* `racktables::apache`: Installs Apache and a vhost for Racktables
+* `racktables::mysql`: Install MySQL and sets up a database for Racktables
+
 
 ## Limitations
 
-This is where you list OS compatibility, version compatibility, etc.
+###RHEL/CentOS 5
+
+Package installation for PHP won't work
+
+###RHEL/CentOS 7
+
+Should work, but has not been tested
+
+###Ubuntu 12.04
+
+Should work, but has not been tested
+
+###Ubuntu 14.04
+
+Should world, but has not been tested
 
 ## Development
 
-Since your module is awesome, other users will want to play with it. Let them
-know what the ground rules for contributing are.
+###Contributing
+
+Feel free to contact me if you have suggestions or patches.
 
 ## Release Notes/Contributors/Etc **Optional**
 
-If you aren't using changelog, put your release notes here (though you should
-consider using changelog). You may also add any additional sections you feel are
-necessary or important to include here. Please use the `## ` header.
+* 0.1.0 Initial release

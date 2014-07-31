@@ -40,10 +40,10 @@ Exsisting Apache, MySQL and RackTables installations might/will be overwritten.
 To install RackTables with the default parameters
 
 ```puppet
-    class { '::racktables':
-      secretwriteable => true,
-      vhost           => 'racktables.example.com',
-    }
+   class { '::racktables':
+     secretwriteable => true,
+     vhost           => 'racktables.example.com',
+   }
 ```
 
 As soon as puppet is done installing, go to vhost address and append ?module=installer to the URL (Example URL: http://racktables.example.com/?module=installer). From there follow the RackTables installation steps, 7 in total.
@@ -62,25 +62,25 @@ When you get to RackTables installation step 4 (of 7), remove the `secretwriteab
 Set a root password for your mysql installation (default password is "strongpassword" if undefined):
 
 ```puppet
-    class { '::racktables':
-      secretwriteable => true,
-      mysqlrootpw     => 'change.me123XXXabc',
-      vhost           => 'racktables.example.com',
-    }
+   class { '::racktables':
+     secretwriteable => true,
+     mysqlrootpw     => 'change.me123XXXabc',
+     vhost           => 'racktables.example.com',
+   }
 ```
 
 Proper installation with recommended parameters:
 
 ```puppet
-    class { '::racktables':
-      secretwriteable => true,
-      vhost           => 'racktables.example.com',
-      mysqlrootpw     => 'strongpassword123.XXXabc',
-      mysqldb         => 'racktables',
-      mysqluser       => 'racktables',
-      mysqluserpw     => 'otherstrongpasswordXXX123XXX.abc',
-      mysqlhost       => 'localhost',
-    }
+   class { '::racktables':
+     secretwriteable => true,
+     vhost           => 'racktables.example.com',
+     mysqlrootpw     => 'strongpassword123.XXXabc',
+     mysqldb         => 'racktables',
+     mysqluser       => 'racktables',
+     mysqluserpw     => 'otherstrongpasswordXXX123XXX.abc',
+     mysqlhost       => 'localhost',
+   }
 ```
 
 When installations done, dont forget to set secretwriteable to false (or remove the whole parameter). You can also remove the mysqlrootpw parameter, as it is now stored in /root/.my.cnf on the local server.
@@ -88,13 +88,13 @@ When installations done, dont forget to set secretwriteable to false (or remove 
 In other words, after installation is done your class should look like this:
 
 ```puppet
-    class { '::racktables':
-      vhost           => 'racktables.example.com',
-      mysqldb         => 'racktables',
-      mysqluser       => 'racktables',
-      mysqluserpw     => 'otherstrongpasswordXXX123XXX.abc',
-      mysqlhost       => 'localhost',
-    }
+   class { '::racktables':
+     vhost           => 'racktables.example.com',
+     mysqldb         => 'racktables',
+     mysqluser       => 'racktables',
+     mysqluserpw     => 'otherstrongpasswordXXX123XXX.abc',
+     mysqlhost       => 'localhost',
+   }
 ```
 ## Usage
 

@@ -102,6 +102,7 @@ In other words, after installation is done your class should look like this:
 
 ####Class: `racktables`
 
+
 #####`secretwriteable`
 
 Makes the inc/secret.php file writeable for apache during setup. Set this parameter to true while installing racktables and false after installation is done. Defaults to 'false'.

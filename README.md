@@ -96,7 +96,55 @@ In other words, after installation is done your class should look like this:
       mysqlhost       => 'localhost',
     }
 ```
+## Usage
 
+###Classes and Defined Types
+
+####Class: `racktables`
+
+#####`secretwriteable`
+
+Makes the inc/secret.php file writeable for apache during setup. Set this parameter to true while installing racktables and false after installation is done. Defaults to 'false'.
+
+#####`vhost`
+
+The virtual host address to use for your racktables installation. Requires a valid DNS entry. Defaults to 'racktables.example.com'.
+
+#####`mysqlrootpw`
+
+Sets the root password on MySQL. Defaults to 'strongpassword'.
+
+#####`mysqluser`
+
+Sets the mysql user for the racktables database. Defaults to 'racktables_user'.
+
+#####`mysqluserpw`
+
+Sets the password for the "mysqluser". Defaults to 'racktables_pass'. 
+
+#####`mysqldb`
+
+Sets the name of the database for racktables. Defaults to 'racktables_db'.
+
+#####`mysqlhost`
+
+Sets the name of the database to connect to. Defaults to 'localhost'.
+
+#####`datadir`
+
+Specifies the installation path of RackTables. Defaults to '/usr/local/share/RackTables'.
+
+#####`apacheuser`
+
+Specifies the apache user. Used for setting permissions to inc/secret.php. Defaults to 'apache' for RedHat/CentOS and 'www-data' for Debian/Ubuntu.
+
+#####`vcsprovider`
+
+Defines what vcs system to use for downloading RackTables. Defaults to 'git'.
+
+#####`source`
+
+Path to RackTables source. Defaults to ''https://github.com/RackTables/racktables.git'.
 
 ## Reference
 

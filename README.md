@@ -135,8 +135,8 @@ Should world, but has not been tested
 
 ###Contributing
 
-Feel free to contact me if you have suggestions or patches.
+Feel free to contact me if you'd like to contribute in any way.
 
-## Release Notes/Contributors/Etc **Optional**
+## Release Notes/Contributors/Etc
 
 * 0.1.0 Initial release

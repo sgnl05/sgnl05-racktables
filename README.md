@@ -164,21 +164,9 @@ Path to RackTables source. Defaults to ''https://github.com/RackTables/racktable
 
 ## Limitations
 
-###RHEL/CentOS 5
-
-Package installation for PHP won't work
-
-###RHEL/CentOS 7
+###Ubuntu 12.04 and 14.04
 
 Should work, but has not been tested
-
-###Ubuntu 12.04
-
-Should work, but has not been tested
-
-###Ubuntu 14.04
-
-Should world, but has not been tested
 
 ## Development
 

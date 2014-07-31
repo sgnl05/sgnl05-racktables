@@ -44,19 +44,19 @@
   "dependencies": [
     {
       "version_range": ">= 1.1.1",
-      "name": "puppetlabs-apache"
+      "name": "puppetlabs/apache"
     },
     {
       "version_range": ">= 2.3.1",
-      "name": "puppetlabs-mysql"
+      "name": "puppetlabs/mysql"
     },
     {
       "version_range": ">= 1.1.0",
-      "name": "puppetlabs-vcsrepo"
+      "name": "puppetlabs/vcsrepo"
     },
     {
       "version_range": ">= 4.3.2",
-      "name": "puppetlabs-stdlib"
+      "name": "puppetlabs/stdlib"
     }
   ]
 }

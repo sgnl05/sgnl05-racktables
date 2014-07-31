@@ -25,14 +25,14 @@ Use this module to install the latest development version of RackTables. The mod
 
 WARNING:
 This is not ment for production servers. Use this module on NEW servers for development or demo purposes only! 
-Exsisting Apache, MySQL and RackTables installations might/will be overwritten.
+Existing Apache, MySQL and RackTables installations might/will be overwritten.
 
 
 ## Setup
 
 ### What racktables affects
 
-* Apache - Any exsisting config will be replaced or purged.
+* Apache - Any existing config will be replaced and/or purged.
 * MySQL - Existing databases and settings might get overwritten.
 
 ### Beginning with RackTables module

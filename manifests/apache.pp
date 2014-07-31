@@ -6,6 +6,7 @@ class racktables::apache inherits racktables {
     default_confd_files => false,
     default_vhost       => false,
     default_ssl_vhost   => false,
+    mpm_module          => 'prefork',
   }
 
   class {'::apache::mod::php': }

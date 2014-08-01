@@ -173,9 +173,3 @@ Should work, but has not been tested
 ###Contributing
 
 Please use the issue tracker (https://github.com/sgnl05/sgnl05-racktables/issues) for any type of contribution. 
-
-## Release Notes/Contributors/Etc
-
-* 0.1.1 - 2014-07-31 Updated documentation. No new features.
-* 0.1.0 - 2014-07-30 Initial release
-

@@ -10,6 +10,8 @@ class racktables::apache inherits racktables {
   }
 
   class {'::apache::mod::php': }
+  class {'::apache::mod::auth_basic': }
+  class {'::apache::mod::authnz_ldap': }
 
   apache::vhost { "${vhost}-http":
     servername      => "${vhost}",
@@ -31,6 +33,7 @@ class racktables::apache inherits racktables {
     error_log_file  => "${vhost}_error_ssl_log",
     ssl             => true,
     require         => vcsrepo[$datadir],
+    override        => 'AuthConfig',
   }
 
 }

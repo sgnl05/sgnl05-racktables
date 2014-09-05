@@ -164,9 +164,13 @@ Path to RackTables source. Defaults to ''https://github.com/RackTables/racktable
 
 ## Limitations
 
-###Ubuntu 14.04
+###RHEL 7
 
-Should work, but has not been tested
+Should work, but has not been tested.
+
+###CentOS 7
+
+MySQL installation won't work as puppetlabs-mysql version 2.3.1 is broken on this OS version.
 
 ## Development
 

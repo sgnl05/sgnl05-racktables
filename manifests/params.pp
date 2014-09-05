@@ -1,15 +1,15 @@
 #
 class racktables::params {
 
-  $secretwriteable = false
-  $vhost           = 'racktables.example.org'
-  $mysqlrootpw     = 'strongpassword'
-  $mysqluser       = 'racktables_user'
-  $mysqluserpw     = 'racktables_pass'
-  $mysqldb         = 'racktables_db'
-  $mysqlhost       = 'localhost'
-  $vcsprovider     = 'git'
-  $source          = 'https://github.com/RackTables/racktables.git'
+  $secretfile  = undef
+  $vhost       = 'racktables.example.org'
+  $mysqlrootpw = 'strongpassword'
+  $mysqluser   = 'racktables_user'
+  $mysqluserpw = 'racktables_pass'
+  $mysqldb     = 'racktables_db'
+  $mysqlhost   = 'localhost'
+  $vcsprovider = 'git'
+  $source      = 'https://github.com/RackTables/racktables.git'
 
   case $::osfamily {
 

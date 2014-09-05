@@ -42,20 +42,7 @@ class racktables::install inherits racktables {
     source   => $source,
   }
 
-  if $secretwriteable == true {
-
-    file { "${datadir}/wwwroot/inc/secret.php":
-      ensure  => present,
-      owner   => $apacheuser,
-      mode    => '0600',
-      seluser => 'system_u',
-      selrole => 'object_r',
-      seltype => 'httpd_sys_content_t',
-      require => vcsrepo[$datadir],
-    }
-
-  } else {
-
+  if $secretfile == 'readable' {
     file { "${datadir}/wwwroot/inc/secret.php":
       ensure  => present,
       owner   => $apacheuser,
@@ -65,7 +52,23 @@ class racktables::install inherits racktables {
       seltype => 'httpd_sys_content_t',
       require => vcsrepo[$datadir],
     }
-
+  }
+  elsif $secretfile == 'writable' {
+    file { "${datadir}/wwwroot/inc/secret.php":
+      ensure  => present,
+      owner   => $apacheuser,
+      mode    => '0600',
+      seluser => 'system_u',
+      selrole => 'object_r',
+      seltype => 'httpd_sys_content_t',
+      require => vcsrepo[$datadir],
+    }
+  }
+  elsif $secretfile == 'absent' {
+    file { "${datadir}/wwwroot/inc/secret.php":
+      ensure => absent,
+    }
   }
 
 }
+

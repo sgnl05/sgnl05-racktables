@@ -36,22 +36,22 @@
 # Copyright 2014 Your name here, unless otherwise noted.
 #
 class racktables (
-  $secretwriteable = $racktables::params::secretwriteable,
-  $vhost           = $racktables::params::vhost,
-  $mysqlrootpw     = $racktables::params::mysqlrootpw,
-  $mysqluser       = $racktables::params::mysqluser,
-  $mysqluserpw     = $racktables::params::mysqluserpw,
-  $mysqldb         = $racktables::params::mysqldb,
-  $mysqlhost       = $racktables::params::mysqlhost,
-  $datadir         = $racktables::params::datadir,
-  $docdir          = $racktables::params::docdir,
-  $apacheuser      = $racktables::params::apacheuser,
-  $vcsprovider     = $racktables::params::vcsprovider,
-  $source          = $racktables::params::source,
+  $secretfile  = $racktables::params::secretwriteable,
+  $vhost       = $racktables::params::vhost,
+  $mysqlrootpw = $racktables::params::mysqlrootpw,
+  $mysqluser   = $racktables::params::mysqluser,
+  $mysqluserpw = $racktables::params::mysqluserpw,
+  $mysqldb     = $racktables::params::mysqldb,
+  $mysqlhost   = $racktables::params::mysqlhost,
+  $datadir     = $racktables::params::datadir,
+  $docdir      = $racktables::params::docdir,
+  $apacheuser  = $racktables::params::apacheuser,
+  $vcsprovider = $racktables::params::vcsprovider,
+  $source      = $racktables::params::source,
 
 ) inherits racktables::params {
 
-  validate_bool($secretwriteable)
+  validate_string($secretfile)
   validate_string($vhost)
   validate_string($mysqlrootpw)
   validate_string($mysqluser)

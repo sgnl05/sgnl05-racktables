@@ -41,21 +41,20 @@ To install RackTables with the default parameters
 
 ```puppet
    class { '::racktables':
-     secretwriteable => true,
-     vhost           => 'racktables.example.com',
+     vhost => 'racktables.example.com',
    }
 ```
 
-As soon as puppet is done installing, go to vhost address and append ?module=installer to the URL (Example URL: http://racktables.example.com/?module=installer). From there follow the RackTables installation steps, 7 in total.
+As soon as puppet is done installing, go to vhost address (Example URL: http://racktables.example.com/). From there follow the RackTables installation steps, 7 in total.
 
 Default database settings are:
 * database: racktables_db
 * username: racktables_user
 * password: racktables_pass
 
-These values can be changed by adding parameters mysqldb, mysqluser and mysqluserpw to the ::racktables class (See more [examples](#examples)).
+These values can be changed by adding parameters 'mysqldb', 'mysqluser' and 'mysqluserpw' to the ::racktables class (See more [examples](#examples)).
 
-When you get to RackTables installation step 4 (of 7), remove the `secretwriteable` parameter from the ::racktables class (or set it to false). Next, re-run puppet and then finnish the rest of the installation steps.
+Handling the permissions of secret.php at installation step 3 and 4 of can be assisted by Puppet. Use an attribute named 'secretfile' on the ::racktables class and set it to "writable" on step 3 and "readable" on step 4. Remember to run "puppet agent -t" after modifing attributes.
 
 #### Examples
 
@@ -63,9 +62,9 @@ Set a root password for your mysql installation (default password is "strongpass
 
 ```puppet
    class { '::racktables':
-     secretwriteable => true,
-     mysqlrootpw     => 'change.me123XXXabc',
-     vhost           => 'racktables.example.com',
+     vhost       => 'racktables.example.com',
+     mysqlrootpw => 'change.me123XXXabc',
+     secretfile  => 'writable',
    }
 ```
 
@@ -73,27 +72,28 @@ Proper installation with recommended parameters:
 
 ```puppet
    class { '::racktables':
-     secretwriteable => true,
-     vhost           => 'racktables.example.com',
-     mysqlrootpw     => 'strongpassword123.XXXabc',
-     mysqldb         => 'racktables',
-     mysqluser       => 'racktables',
-     mysqluserpw     => 'otherstrongpasswordXXX123XXX.abc',
-     mysqlhost       => 'localhost',
+     vhost       => 'racktables.example.com',
+     mysqlrootpw => 'strongpassword123.XXXabc',
+     mysqldb     => 'racktables',
+     mysqluser   => 'racktables',
+     mysqluserpw => 'otherstrongpasswordXXX123XXX.abc',
+     mysqlhost   => 'localhost',
+     secretfile  => 'writable',
    }
 ```
 
-When installations done, dont forget to set secretwriteable to false (or remove the whole parameter). You can also remove the mysqlrootpw parameter, as it is now stored in /root/.my.cnf on the local server.
+When installation is complete, dont forget to set the attribute 'secretfile' to "readable". You can also remove the 'mysqlrootpw' attribute, as it is now stored in /root/.my.cnf on the local server.
 
 In other words, after installation is done your class should look like this:
 
 ```puppet
    class { '::racktables':
-     vhost           => 'racktables.example.com',
-     mysqldb         => 'racktables',
-     mysqluser       => 'racktables',
-     mysqluserpw     => 'otherstrongpasswordXXX123XXX.abc',
-     mysqlhost       => 'localhost',
+     vhost       => 'racktables.example.com',
+     mysqldb     => 'racktables',
+     mysqluser   => 'racktables',
+     mysqluserpw => 'otherstrongpasswordXXX123XXX.abc',
+     mysqlhost   => 'localhost',
+     secretfile  => 'readable',
    }
 ```
 ## Usage
@@ -103,9 +103,9 @@ In other words, after installation is done your class should look like this:
 ####Class: `racktables`
 
 
-#####`secretwriteable`
+#####`secretfile`
 
-Makes the inc/secret.php file writeable for apache during setup. Set this parameter to true while installing racktables and false after installation is done. Defaults to 'false'.
+Sets permissions to the inc/secret.php file for apache during setup. Set this attribute to writable while installing racktables and readable after installation is done. Setting this attibute to "absent" removes the file. Defaults to "undef", which results in permissions not being modified.
 
 #####`vhost`
 
@@ -164,7 +164,7 @@ Path to RackTables source. Defaults to ''https://github.com/RackTables/racktable
 
 ## Limitations
 
-###Ubuntu 12.04 and 14.04
+###Ubuntu 14.04
 
 Should work, but has not been tested
 

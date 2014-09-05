@@ -25,6 +25,7 @@ class racktables::install inherits racktables {
       'php5-mysql',
       'php5-snmp',
       'php5-ldap',
+      'php5-curl',
       ]:
         ensure => present,
       }

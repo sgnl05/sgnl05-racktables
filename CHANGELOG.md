@@ -1,10 +1,14 @@
-## 2014-09-05 Release 0.1.3
-
-###Bugfixes
-
-php5-ldap dependency for Debian/Ubuntu. Jens Rosenbloom (#2)
+## 2014-XX-XX Release 0.1.4
 
 ###Updates
+
+php5-curl dependency for Debian/Ubuntu.
+
+## 2014-09-05 Release 0.1.3
+
+###Updates
+
+php5-ldap dependency for Debian/Ubuntu. Jens Rosenbloom (#2)
 
 Changed attribute name 'secretwriteable' to 'secretfile' and changed the installation routine to be more intuitive regarding this file.  
 

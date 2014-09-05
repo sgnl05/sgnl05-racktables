@@ -45,7 +45,7 @@ To install RackTables with the default parameters
    }
 ```
 
-As soon as puppet is done installing, go to vhost address (Example URL: http://racktables.example.com/). From there follow the RackTables installation steps, 7 in total.
+As soon as Puppet is done installing, go to vhost address and append ?module=installer to the URL (Example URL: https://racktables.example.com/?module=installer). From there follow the RackTables installation steps (7 in total).
 
 Default database settings are:
 * database: racktables_db

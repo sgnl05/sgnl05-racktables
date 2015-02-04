@@ -2,7 +2,7 @@
 class racktables::mysql inherits racktables {
 
   class { '::mysql::server':
-    root_password => "$mysqlrootpw",
+    root_password => '$mysqlrootpw',
   }
 
   mysql::db { $mysqldb :

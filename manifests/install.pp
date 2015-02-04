@@ -19,7 +19,7 @@ class racktables::install inherits racktables {
     }
 
     'Debian': {
-      package { [ 
+      package { [
       $vcsprovider,
       'php5-gd',
       'php5-mysql',

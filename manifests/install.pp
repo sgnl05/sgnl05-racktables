@@ -51,7 +51,7 @@ class racktables::install inherits racktables {
       seluser => 'system_u',
       selrole => 'object_r',
       seltype => 'httpd_sys_content_t',
-      require => vcsrepo[$datadir],
+      require => Vcsrepo[$datadir],
     }
   }
   elsif $secretfile == 'writable' {
@@ -62,7 +62,7 @@ class racktables::install inherits racktables {
       seluser => 'system_u',
       selrole => 'object_r',
       seltype => 'httpd_sys_content_t',
-      require => vcsrepo[$datadir],
+      require => Vcsrepo[$datadir],
     }
   }
   elsif $secretfile == 'absent' {

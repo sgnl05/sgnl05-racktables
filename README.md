@@ -111,16 +111,16 @@ In other words, after installation is done your class should look like this:
 
 Sets permissions to the inc/secret.php file for apache during setup. Set this attribute to "writable" while installing racktables and "readonly" after installation step 4. Setting this attibute to "absent" removes the file. Defaults to "undef", which results in permissions not being modified.
 
-#####`release`
-
-Selects the RackTables version. The version is pulled from https://github.com/RackTables/racktables/ using a Git revision TAG.
-The RackTables project on GitHub has (so far) tagged every release with "RackTables-[version]". Make sure the version you enter is available at https://github.com/RackTables/racktables/tree/VERSION.
-You can automatically upgrade the racktables version by modifying this attribute to a higher version number.
-Defaults to 'undef'.
-
 #####`vhost`
 
 The virtual host address to use for your racktables installation. Requires a valid DNS entry. Defaults to 'racktables.example.com'.
+
+#####`release`
+
+Selects what RackTables version to download. The version is pulled from https://github.com/RackTables/racktables/tree/REVISION (Revision = Git revision TAG).
+The RackTables project on GitHub has (so far) tagged every release with "RackTables-[version]".
+You can automatically upgrade the racktables version by modifying this attribute to a higher version number.
+Defaults to 'undef', which results in the default repo being downloaded. After first download, 'undef' setting will not modify local files even if the remote repo is updated.
 
 #####`mysqlrootpw`
 

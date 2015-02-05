@@ -12,7 +12,7 @@ class racktables::apache inherits racktables {
   class {'::apache::mod::php': }
 
   apache::vhost { "${vhost}-http":
-    servername      => "${vhost}",
+    servername      => $vhost,
     port            => '80',
     docroot         => "${datadir}/wwwroot",
     access_log_file => "${vhost}_access_log",
@@ -24,7 +24,7 @@ class racktables::apache inherits racktables {
   }
 
   apache::vhost { "${vhost}-https":
-    servername      => "${vhost}",
+    servername      => $vhost,
     port            => '443',
     docroot         => "${datadir}/wwwroot",
     access_log_file => "${vhost}_access_ssl_log",

@@ -114,7 +114,7 @@ Sets permissions to the inc/secret.php file for apache during setup. Set this at
 #####`release`
 
 Selects the RackTables version. The version is pulled from https://github.com/RackTables/racktables/ using a Git revision TAG.
-The RackTables project on GitHub has (so far) tagged every release with "RackTables-<version>". Make sure the version you enter is available at https://github.com/RackTables/racktables/tree/VERSION.
+The RackTables project on GitHub has (so far) tagged every release with "RackTables-[version]". Make sure the version you enter is available at https://github.com/RackTables/racktables/tree/VERSION.
 You can automatically upgrade the racktables version by modifying this attribute to a higher version number.
 Defaults to 'undef'.
 

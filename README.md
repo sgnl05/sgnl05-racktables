@@ -175,13 +175,9 @@ Path to RackTables source. Defaults to 'https://github.com/RackTables/racktables
 
 ## Limitations
 
-###RHEL 7
+###RHEL/CentOS 7
 
 Should work, but has not been tested.
-
-###CentOS 7
-
-MySQL installation won't work as puppetlabs-mysql version 2.3.1 is broken on this OS version.
 
 ## Development
 

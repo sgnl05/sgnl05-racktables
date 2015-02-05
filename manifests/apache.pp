@@ -20,7 +20,7 @@ class racktables::apache inherits racktables {
     redirect_source => ['/'],
     redirect_dest   => ["https://${vhost}/"],
     redirect_status => ['temp'],
-    require         => vcsrepo[$datadir],
+    require         => Vcsrepo[$datadir],
   }
 
   apache::vhost { "${vhost}-https":
@@ -30,7 +30,7 @@ class racktables::apache inherits racktables {
     access_log_file => "${vhost}_access_ssl_log",
     error_log_file  => "${vhost}_error_ssl_log",
     ssl             => true,
-    require         => vcsrepo[$datadir],
+    require         => Vcsrepo[$datadir],
   }
 
 }

@@ -175,7 +175,7 @@ Path to RackTables source. Defaults to 'https://github.com/RackTables/racktables
 
 ## Limitations
 
-###RHEL/CentOS 7
+#####RHEL/CentOS 7
 
 Should work, but has not been tested.
 

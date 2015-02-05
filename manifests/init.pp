@@ -36,7 +36,7 @@
 # Copyright 2014 Your name here, unless otherwise noted.
 #
 class racktables (
-  $secretfile  = $racktables::params::secretwriteable,
+  $secretfile  = $racktables::params::secretfile,
   $vhost       = $racktables::params::vhost,
   $mysqlrootpw = $racktables::params::mysqlrootpw,
   $mysqluser   = $racktables::params::mysqluser,

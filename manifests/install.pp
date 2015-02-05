@@ -62,33 +62,35 @@ class racktables::install inherits racktables {
     }
   
     'readable', 'readonly', 'read', 'r': {
-    file { "${datadir}/wwwroot/inc/secret.php":
-      ensure  => present,
-      owner   => $apacheuser,
-      mode    => '0400',
-      seluser => 'system_u',
-      selrole => 'object_r',
-      seltype => 'httpd_sys_content_t',
-      require => Vcsrepo[$datadir],
+      file { "${datadir}/wwwroot/inc/secret.php":
+        ensure  => present,
+        owner   => $apacheuser,
+        mode    => '0400',
+        seluser => 'system_u',
+        selrole => 'object_r',
+        seltype => 'httpd_sys_content_t',
+        require => Vcsrepo[$datadir],
+      }
     }
-  }
 
-  'writable', 'writeable', 'write', 'w': {
-    file { "${datadir}/wwwroot/inc/secret.php":
-      ensure  => present,
-      owner   => $apacheuser,
-      mode    => '0600',
-      seluser => 'system_u',
-      selrole => 'object_r',
-      seltype => 'httpd_sys_content_t',
-      require => Vcsrepo[$datadir],
+    'writable', 'writeable', 'write', 'w': {
+      file { "${datadir}/wwwroot/inc/secret.php":
+        ensure  => present,
+        owner   => $apacheuser,
+        mode    => '0600',
+        seluser => 'system_u',
+        selrole => 'object_r',
+        seltype => 'httpd_sys_content_t',
+        require => Vcsrepo[$datadir],
+      }
     }
-  }
 
-  'absent', 'delete': {
-    file { "${datadir}/wwwroot/inc/secret.php":
-      ensure => absent,
+    'absent', 'delete': {
+      file { "${datadir}/wwwroot/inc/secret.php":
+        ensure => absent,
+      }
     }
+
   }
 
 }

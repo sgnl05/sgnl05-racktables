@@ -37,6 +37,7 @@
 #
 class racktables (
   $secretfile  = $racktables::params::secretfile,
+  $release     = $racktables::params::release,
   $vhost       = $racktables::params::vhost,
   $mysqlrootpw = $racktables::params::mysqlrootpw,
   $mysqluser   = $racktables::params::mysqluser,
@@ -52,6 +53,7 @@ class racktables (
 ) inherits racktables::params {
 
   validate_string($secretfile)
+  validate_string($release)
   validate_string($vhost)
   validate_string($mysqlrootpw)
   validate_string($mysqluser)

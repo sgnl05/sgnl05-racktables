@@ -37,13 +37,31 @@ class racktables::install inherits racktables {
 
   }
 
-  vcsrepo { $datadir:
-    ensure   => present,
-    provider => $vcsprovider,
-    source   => $source,
+  # Pull RackTables from source
+  if $release == undef {
+    vcsrepo { $datadir:
+      ensure   => present,
+      provider => $vcsprovider,
+      source   => $source,
+    }
+  }
+  else {
+    vcsrepo { $datadir:
+      ensure   => latest,
+      provider => $vcsprovider,
+      source   => $source,
+      revision => $release,
+    }
   }
 
-  if $secretfile == 'readable' {
+  # Handle secret file
+  case $secretfile {
+
+    default: {
+      # No action
+    }
+  
+    'readable', 'readonly', 'read', 'r': {
     file { "${datadir}/wwwroot/inc/secret.php":
       ensure  => present,
       owner   => $apacheuser,
@@ -54,7 +72,8 @@ class racktables::install inherits racktables {
       require => Vcsrepo[$datadir],
     }
   }
-  elsif $secretfile == 'writable' {
+
+  'writable', 'writeable', 'write', 'w': {
     file { "${datadir}/wwwroot/inc/secret.php":
       ensure  => present,
       owner   => $apacheuser,
@@ -65,11 +84,11 @@ class racktables::install inherits racktables {
       require => Vcsrepo[$datadir],
     }
   }
-  elsif $secretfile == 'absent' {
+
+  'absent', 'delete': {
     file { "${datadir}/wwwroot/inc/secret.php":
       ensure => absent,
     }
   }
 
 }
-

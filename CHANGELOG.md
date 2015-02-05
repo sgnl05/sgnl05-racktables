@@ -1,4 +1,15 @@
-## 2014-XX-XX Release 0.1.4
+## 2014-09-05 Release 0.2.0
+
+##Updates
+
+Added ability to select what RackTables version to download.
+
+Changed secret file handling.
+
+Updated puppetlabs-mysql requirements to version 3.1.0. This should fix CentOS 7 support (not tested).
+
+
+## 2014-09-05 Release 0.1.4
 
 ###Updates
 

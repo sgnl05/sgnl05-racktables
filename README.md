@@ -14,34 +14,36 @@
 
 ## Overview
 
-This Puppet module installs the latest development version of RackTables, along with Apache, PHP and MySQL.
+This Puppet module installs RackTables, along with Apache, PHP, MySQL.
 
 ## Module Description
 
 RackTables is nifty and robust solution for datacenter and server room asset management. It helps document hardware assets, network addresses, space in racks, networks configuration and much much more.
 
-Use this module to install the latest development version of RackTables. The module will also install Apache, PHP, MySQL and some other dependencies for RackTables (php packages mostly).
+Use this module to install a new instance of RackTables. The module will also install Apache, PHP, MySQL and some other dependencies for RackTables (php packages mostly).
 
 
 WARNING:
-This is not ment for production servers. Use this module on NEW servers for development or demo purposes only! 
-Existing Apache, MySQL and RackTables installations might/will be overwritten.
+Use this module on NEW servers! 
+Existing databases, webserver configs and RackTables installations will be replaced.
 
 
 ## Setup
 
 ### What racktables affects
 
-* Apache - Any existing config will be replaced and/or purged.
-* MySQL - Existing databases and settings might get overwritten.
+* Apache - Any existing config will be replaced or purged.
+* MySQL - Existing databases and settings might be replaced.
+* RackTables - Existing RackTable files might be replaced
 
 ### Beginning with RackTables module
 
-To install RackTables with the default parameters
+To install RackTables version 0.20.10 with the default parameters:
 
 ```puppet
    class { '::racktables':
-     vhost => 'racktables.example.com',
+     vhost   => 'racktables.example.com',
+     release => 'RackTables-0.20.10',
    }
 ```
 
@@ -54,7 +56,7 @@ Default database settings are:
 
 These values can be changed by adding parameters 'mysqldb', 'mysqluser' and 'mysqluserpw' to the ::racktables class (See more [examples](#examples)).
 
-Handling the permissions of secret.php at installation step 3 and 4 of can be assisted by Puppet. Use an attribute named 'secretfile' on the ::racktables class and set it to "writable" on step 3 and "readable" on step 4. Remember to run "puppet agent -t" after modifing attributes.
+Handling the permissions of secret.php at installation step 3 and 4 of can be assisted by Puppet. Use an attribute named 'secretfile' on the ::racktables class and set it to "writable" on step 3 and "readonly" on step 4. Remember to run "puppet agent -t" after modifing attributes.
 
 #### Examples
 
@@ -63,8 +65,8 @@ Set a root password for your mysql installation (default password is "strongpass
 ```puppet
    class { '::racktables':
      vhost       => 'racktables.example.com',
+     release     => 'RackTables-0.20.10', 
      mysqlrootpw => 'change.me123XXXabc',
-     secretfile  => 'writable',
    }
 ```
 
@@ -73,29 +75,31 @@ Proper installation with recommended parameters:
 ```puppet
    class { '::racktables':
      vhost       => 'racktables.example.com',
+     release     => 'RackTables-0.20.10',
      mysqlrootpw => 'strongpassword123.XXXabc',
      mysqldb     => 'racktables',
      mysqluser   => 'racktables',
      mysqluserpw => 'otherstrongpasswordXXX123XXX.abc',
      mysqlhost   => 'localhost',
-     secretfile  => 'writable',
    }
 ```
 
-When installation is complete, dont forget to set the attribute 'secretfile' to "readable". You can also remove the 'mysqlrootpw' attribute, as it is now stored in /root/.my.cnf on the local server.
+When installation is complete, dont forget to set the attribute 'secretfile' to "readonly". You can also remove the 'mysqlrootpw' attribute, as it is now stored in /root/.my.cnf on the local server.
 
 In other words, after installation is done your class should look like this:
 
 ```puppet
    class { '::racktables':
      vhost       => 'racktables.example.com',
+     release     => 'RackTables-0.20.10',
      mysqldb     => 'racktables',
      mysqluser   => 'racktables',
      mysqluserpw => 'otherstrongpasswordXXX123XXX.abc',
      mysqlhost   => 'localhost',
-     secretfile  => 'readable',
+     secretfile  => 'readonly',
    }
 ```
+
 ## Usage
 
 ###Classes and Defined Types
@@ -105,7 +109,14 @@ In other words, after installation is done your class should look like this:
 
 #####`secretfile`
 
-Sets permissions to the inc/secret.php file for apache during setup. Set this attribute to writable while installing racktables and readable after installation is done. Setting this attibute to "absent" removes the file. Defaults to "undef", which results in permissions not being modified.
+Sets permissions to the inc/secret.php file for apache during setup. Set this attribute to "writable" while installing racktables and "readonly" after installation step 4. Setting this attibute to "absent" removes the file. Defaults to "undef", which results in permissions not being modified.
+
+#####`release`
+
+Selects the RackTables version. The version is pulled from https://github.com/RackTables/racktables/ using a Git revision TAG.
+The RackTables project on GitHub has (so far) tagged every release with "RackTables-<version>". Make sure the version you enter is available at https://github.com/RackTables/racktables/tree/VERSION.
+You can automatically upgrade the racktables version by modifying this attribute to a higher version number.
+Defaults to 'undef'.
 
 #####`vhost`
 
@@ -145,7 +156,7 @@ Defines what vcs system to use for downloading RackTables. Defaults to 'git'.
 
 #####`source`
 
-Path to RackTables source. Defaults to ''https://github.com/RackTables/racktables.git'.
+Path to RackTables source. Defaults to 'https://github.com/RackTables/racktables.git'.
 
 ## Reference
 

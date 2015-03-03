@@ -27,12 +27,12 @@ class racktables::install (
 
     'Debian': {
       package { [
-      $vcsprovider,
-      'php5-gd',
-      'php5-mysql',
-      'php5-snmp',
-      'php5-ldap',
-      'php5-curl',
+        $vcsprovider,
+        'php5-gd',
+        'php5-mysql',
+        'php5-snmp',
+        'php5-ldap',
+        'php5-curl',
       ]:
         ensure => present,
       }

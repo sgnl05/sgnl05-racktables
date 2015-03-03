@@ -51,7 +51,6 @@ class racktables (
   $apacheuser  = $racktables::params::apacheuser,
   $vcsprovider = $racktables::params::vcsprovider,
   $source      = $racktables::params::source,
-
 ) inherits racktables::params {
 
   validate_string($secretfile)
@@ -68,9 +67,13 @@ class racktables (
   validate_string($vcsprovider)
   validate_string($source)
 
-  class { '::racktables::apache':
-    vhost   => $vhost,
-    datadir => $datadir,
+  class { '::racktables::install':
+    secretfile  => $secretfile,
+    release     => $release,
+    datadir     => $datadir,
+    apacheuser  => $apacheuser,
+    vcsprovider => $vcsprovider,
+    source      => $source,
   }
 
   class { '::racktables::mysql':
@@ -81,13 +84,9 @@ class racktables (
     mysqlhost   => $mysqlhost,
   }
 
-  class { '::racktables::install':
-    secretfile  => $secretfile,
-    release     => $release,
-    datadir     => $datadir,
-    apacheuser  => $apacheuser,
-    vcsprovider => $vcsprovider,
-    source      => $source,
+  class { '::racktables::apache':
+    vhost   => $vhost,
+    datadir => $datadir,
   }
 
 }

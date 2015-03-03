@@ -22,11 +22,9 @@ RackTables is nifty and robust solution for datacenter and server room asset man
 
 Use this module to install a new instance of RackTables. The module will also install Apache, PHP, MySQL and some other dependencies for RackTables (php packages mostly).
 
-
 WARNING:
 Use this module on NEW servers! 
-Existing databases, webserver configs and RackTables installations will be replaced.
-
+Existing databases, webserver configs and RackTables installations will be replaced or purged.
 
 ## Setup
 
@@ -56,7 +54,7 @@ Default database settings are:
 
 These values can be changed by adding parameters 'mysqldb', 'mysqluser' and 'mysqluserpw' to the ::racktables class (See more [examples](#examples)).
 
-Handling the permissions of secret.php at installation step 3 and 4 of can be assisted by Puppet. Use an attribute named 'secretfile' on the ::racktables class and set it to "writable" on step 3 and "readonly" on step 4. Remember to run "puppet agent -t" after modifing attributes.
+Handling the permissions of secret.php at installation step 3 and 4 of can be assisted by Puppet. Use an attribute named 'secretfile' on the ::racktables class and set it to "writable" on step 3 and "readonly" on step 4. Remember to run "puppet agent -t" on the target server after each of these steps.
 
 #### Examples
 
@@ -66,7 +64,7 @@ Set a root password for your mysql installation (default password is "strongpass
    class { '::racktables':
      vhost       => 'racktables.example.com',
      release     => 'RackTables-0.20.10', 
-     mysqlrootpw => 'change.me123XXXabc',
+     mysqlrootpw => 'newstrongpassword',
    }
 ```
 
@@ -76,15 +74,15 @@ Proper installation with recommended parameters:
    class { '::racktables':
      vhost       => 'racktables.example.com',
      release     => 'RackTables-0.20.10',
-     mysqlrootpw => 'strongpassword123.XXXabc',
+     mysqlrootpw => 'make_a_strong_password',
      mysqldb     => 'racktables',
      mysqluser   => 'racktables',
-     mysqluserpw => 'otherstrongpasswordXXX123XXX.abc',
+     mysqluserpw => 'make_another_strong_password',
      mysqlhost   => 'localhost',
    }
 ```
 
-When installation is complete, dont forget to set the attribute 'secretfile' to "readonly". You can also remove the 'mysqlrootpw' attribute, as it is now stored in /root/.my.cnf on the local server.
+When installation is complete, dont forget to set the attribute 'secretfile' to "readonly". You can also remove the 'mysqlrootpw' attribute, as it is now stored in /root/.my.cnf on the target server.
 
 In other words, after installation is done your class should look like this:
 
@@ -94,7 +92,7 @@ In other words, after installation is done your class should look like this:
      release     => 'RackTables-0.20.10',
      mysqldb     => 'racktables',
      mysqluser   => 'racktables',
-     mysqluserpw => 'otherstrongpasswordXXX123XXX.abc',
+     mysqluserpw => 'make_another_strong_password',
      mysqlhost   => 'localhost',
      secretfile  => 'readonly',
    }
@@ -106,14 +104,15 @@ In other words, after installation is done your class should look like this:
 
 ####Class: `racktables`
 
-
 #####`secretfile`
 
-Sets permissions to the inc/secret.php file for apache during setup. Set this attribute to "writable" while installing racktables and "readonly" after installation step 4. Setting this attibute to "absent" removes the file. Defaults to "undef", which results in permissions not being modified.
+Sets permissions to the inc/secret.php file for apache during setup. Set this attribute to "writable" while installing racktables and "readonly" after installation step 4. Setting this attibute to "absent" removes the file.
+Defaults to "undef", which results in permissions not being modified.
 
 #####`vhost`
 
-The virtual host address to use for your racktables installation. Requires a valid DNS entry. Defaults to 'racktables.example.com'.
+The virtual host address to use for your racktables installation. Requires a valid DNS entry.
+Defaults to 'racktables.example.com'.
 
 #####`release`
 
@@ -124,35 +123,43 @@ Defaults to 'undef', which results in the default repo being downloaded. After f
 
 #####`mysqlrootpw`
 
-Sets the root password on MySQL. Defaults to 'strongpassword'.
+Sets the root password on MySQL.
+Defaults to 'strongpassword'.
 
 #####`mysqluser`
 
-Sets the mysql user for the racktables database. Defaults to 'racktables_user'.
+Sets the mysql user for the racktables database.
+Defaults to 'racktables_user'.
 
 #####`mysqluserpw`
 
-Sets the password for the "mysqluser". Defaults to 'racktables_pass'. 
+Sets the password for the "mysqluser".
+Defaults to 'racktables_pass'. 
 
 #####`mysqldb`
 
-Sets the name of the database for racktables. Defaults to 'racktables_db'.
+Sets the name of the database for racktables.
+Defaults to 'racktables_db'.
 
 #####`mysqlhost`
 
-Sets the name of the database to connect to. Defaults to 'localhost'.
+Sets the name of the database to connect to.
+Defaults to 'localhost'.
 
 #####`datadir`
 
-Specifies the installation path of RackTables. Defaults to '/usr/local/share/RackTables'.
+Specifies the installation path of RackTables.
+Defaults to '/usr/local/share/RackTables'.
 
 #####`apacheuser`
 
-Specifies the apache user. Used for setting permissions to inc/secret.php. Defaults to 'apache' for RedHat/CentOS and 'www-data' for Debian/Ubuntu.
+Specifies the apache user. Used for setting permissions to inc/secret.php.
+Defaults to 'apache' for RedHat/CentOS and 'www-data' for Debian/Ubuntu.
 
 #####`vcsprovider`
 
-Defines what vcs system to use for downloading RackTables. Defaults to 'git'.
+Defines what vcs system to use for downloading RackTables.
+Defaults to 'git'.
 
 #####`source`
 
@@ -164,14 +171,14 @@ Path to RackTables source. Defaults to 'https://github.com/RackTables/racktables
 
 ####Public Classes
 
-* `racktables`: Starts the module and calls racktables::install, racktables::apache and racktables::mysql
+* `racktables`: Starts the module and calls racktables::apache, racktables::mysql and racktables::install
+* `racktables::apache`: Installs Apache and a spesified vhost
+* `racktables::mysql`: Installs MySQL and sets up an empty database
+* `racktables::install`: Pulls and installs RackTables from GitHub (or other specified source)
 
 ####Private Classes
 
-* `racktables::install`: Pulls and installs RackTables from https://github.com/RackTables/racktables.git
-* `racktables::apache`: Installs Apache and a vhost for Racktables
-* `racktables::mysql`: Install MySQL and sets up a database for Racktables
-
+* `racktables::params`: Default parameters
 
 ## Limitations
 

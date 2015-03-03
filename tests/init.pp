@@ -9,4 +9,7 @@
 # Learn more about module testing here:
 # http://docs.puppetlabs.com/guides/tests_smoke.html
 #
-include racktables
+class { '::racktables':
+  vhost   => 'racktables.example.com',
+  release => 'RackTables-0.20.10',
+}

@@ -1,6 +1,13 @@
-## 2014-09-05 Release 0.2.0
+## 2015-03-03 Release 0.2.1
 
-##Updates
+###Bugfix
+
+Root password for MySQL was always set to '$mysqlrootpw'.
+
+
+## 2015-02-05 Release 0.2.0
+
+###Updates
 
 Added ability to select what RackTables version to download.
 
@@ -15,6 +22,7 @@ Updated puppetlabs-mysql requirements to version 3.1.0. This should fix CentOS 7
 
 php5-curl dependency for Debian/Ubuntu.
 
+
 ## 2014-09-05 Release 0.1.3
 
 ###Updates
@@ -22,6 +30,7 @@ php5-curl dependency for Debian/Ubuntu.
 php5-ldap dependency for Debian/Ubuntu. Jens Rosenbloom (#2)
 
 Changed attribute name 'secretwriteable' to 'secretfile' and changed the installation routine to be more intuitive regarding this file.  
+
 
 ## 2014-08-01 Release 0.1.2
 

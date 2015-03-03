@@ -1,11 +1,18 @@
 # Installs RackTables
-class racktables::install {
+class racktables::install (
+  $secretfile  = $racktables::params::secretfile,
+  $release     = $racktables::params::release,
+  $datadir     = $racktables::params::datadir,
+  $apacheuser  = $racktables::params::apacheuser,
+  $vcsprovider = $racktables::params::vcsprovider,
+  $source      = $racktables::params::source,
+) inherits racktables::params {
 
   case $::osfamily {
 
     'RedHat': {
       package { [
-        $racktables::vcsprovider,
+        $vcsprovider,
         'php-mysql',
         'php-ldap',
         'php-pdo',
@@ -20,7 +27,7 @@ class racktables::install {
 
     'Debian': {
       package { [
-      $racktables::vcsprovider,
+      $vcsprovider,
       'php5-gd',
       'php5-mysql',
       'php5-snmp',
@@ -38,55 +45,55 @@ class racktables::install {
   }
 
   # Pull RackTables from source
-  if $racktables::release == undef {
-    vcsrepo { $racktables::datadir:
+  if $release == undef {
+    vcsrepo { $datadir:
       ensure   => present,
-      provider => $racktables::vcsprovider,
-      source   => $racktables::source,
+      provider => $vcsprovider,
+      source   => $source,
     }
   }
   else {
-    vcsrepo { $racktables::datadir:
+    vcsrepo { $datadir :
       ensure   => latest,
-      provider => $racktables::vcsprovider,
-      source   => $racktables::source,
-      revision => $racktables::release,
+      provider => $vcsprovider,
+      source   => $source,
+      revision => $release,
     }
   }
 
   # Handle secret file
-  case $racktables::secretfile {
+  case $secretfile {
 
     default: {
       # No action
     }
 
     'readable', 'readonly', 'read', 'r': {
-      file { "${racktables::datadir}/wwwroot/inc/secret.php":
+      file { "${datadir}/wwwroot/inc/secret.php":
         ensure  => present,
-        owner   => $racktables::apacheuser,
+        owner   => $apacheuser,
         mode    => '0400',
         seluser => 'system_u',
         selrole => 'object_r',
         seltype => 'httpd_sys_content_t',
-        require => Vcsrepo[$racktables::datadir],
+        require => Vcsrepo[$datadir],
       }
     }
 
     'writable', 'writeable', 'write', 'w': {
-      file { "${racktables::datadir}/wwwroot/inc/secret.php":
+      file { "${datadir}/wwwroot/inc/secret.php":
         ensure  => present,
-        owner   => $racktables::apacheuser,
+        owner   => $apacheuser,
         mode    => '0600',
         seluser => 'system_u',
         selrole => 'object_r',
         seltype => 'httpd_sys_content_t',
-        require => Vcsrepo[$racktables::datadir],
+        require => Vcsrepo[$datadir],
       }
     }
 
     'absent', 'delete': {
-      file { "${racktables::datadir}/wwwroot/inc/secret.php":
+      file { "${datadir}/wwwroot/inc/secret.php":
         ensure => absent,
       }
     }

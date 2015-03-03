@@ -68,8 +68,21 @@ class racktables (
   validate_string($vcsprovider)
   validate_string($source)
 
-  class { '::racktables::install': }
-  class { '::racktables::apache': }
-  class { '::racktables::mysql': }
+  class { '::racktables::apache':
+    vhost   => $vhost,
+    datadir => $datadir,
+  }
+
+  class { '::racktables::mysql':
+    mysqlrootpw => $mysqlrootpw,
+    mysqldb     => $mysqldb,
+    mysqluser   => $mysqluser,
+    mysqluserpw => $mysqluserpw,
+    mysqlhost   => $mysqlhost,
+  }
+
+  class { '::racktables::install':
+
+  }
 
 }

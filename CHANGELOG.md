@@ -4,6 +4,9 @@
 
 Root password for MySQL was always set to '$mysqlrootpw'.
 
+###Updates
+
+Use public classes for apache, mysql and racktables install
 
 ## 2015-02-05 Release 0.2.0
 

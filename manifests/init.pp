@@ -82,7 +82,12 @@ class racktables (
   }
 
   class { '::racktables::install':
-
+    secretfile  => $secretfile,
+    release     => $release,
+    datadir     => $datadir,
+    apacheuser  => $apacheuser,
+    vcsprovider => $vcsprovider,
+    source      => $source,
   }
 
 }

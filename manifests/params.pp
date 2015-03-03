@@ -1,4 +1,4 @@
-#
+# Params
 class racktables::params {
 
   $secretfile  = undef
@@ -27,7 +27,7 @@ class racktables::params {
     }
 
     default: {
-      fail("The ${module_name} module is not supported on an ${::osfamily} based system.")
+      fail("${module_name} module is not supported on osfamily ${::osfamily}.")
     }
 
   }

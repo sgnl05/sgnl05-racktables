@@ -1,5 +1,5 @@
-#
-class racktables::apache inherits racktables {
+# Installs apache and racktables vhost
+class racktables::apache {
 
   class { '::apache':
     default_mods        => false,
@@ -11,26 +11,26 @@ class racktables::apache inherits racktables {
 
   class {'::apache::mod::php': }
 
-  apache::vhost { "${vhost}-http":
-    servername      => $vhost,
+  apache::vhost { "${racktables::vhost}-http":
+    servername      => $racktables::vhost,
     port            => '80',
-    docroot         => "${datadir}/wwwroot",
-    access_log_file => "${vhost}_access_log",
-    error_log_file  => "${vhost}_error_log",
+    docroot         => "${racktables::datadir}/wwwroot",
+    access_log_file => "${racktables::vhost}_access_log",
+    error_log_file  => "${racktables::vhost}_error_log",
     redirect_source => ['/'],
-    redirect_dest   => ["https://${vhost}/"],
+    redirect_dest   => ["https://${racktables::vhost}/"],
     redirect_status => ['temp'],
-    require         => Vcsrepo[$datadir],
+    require         => Vcsrepo[$racktables::datadir],
   }
 
-  apache::vhost { "${vhost}-https":
-    servername      => $vhost,
+  apache::vhost { "${racktables::vhost}-https":
+    servername      => $racktables::vhost,
     port            => '443',
-    docroot         => "${datadir}/wwwroot",
-    access_log_file => "${vhost}_access_ssl_log",
-    error_log_file  => "${vhost}_error_ssl_log",
+    docroot         => "${racktables::datadir}/wwwroot",
+    access_log_file => "${racktables::vhost}_access_ssl_log",
+    error_log_file  => "${racktables::vhost}_error_ssl_log",
     ssl             => true,
-    require         => Vcsrepo[$datadir],
+    require         => Vcsrepo[$racktables::datadir],
   }
 
 }

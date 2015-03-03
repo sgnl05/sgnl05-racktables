@@ -23,17 +23,19 @@
 #
 # === Examples
 #
-#  class { racktables:
-#    servers => [ 'pool.ntp.org', 'ntp.local.company.com' ],
-#  }
+# class { '::racktables':
+#   vhost       => 'racktables.example.com',
+#   release     => 'RackTables-0.20.10',
+#   mysqlrootpw => 'change.me123XXXabc',
+# }
 #
 # === Authors
 #
-# Author Name <author@domain.com>
+# Gjermund Jensvoll <gjerjens@gmail.com>
 #
 # === Copyright
 #
-# Copyright 2014 Your name here, unless otherwise noted.
+# Copyright 2014-2015 Gjermund Jensvoll
 #
 class racktables (
   $secretfile  = $racktables::params::secretfile,
@@ -65,7 +67,6 @@ class racktables (
   validate_string($apacheuser)
   validate_string($vcsprovider)
   validate_string($source)
-
 
   class { '::racktables::install': }
   class { '::racktables::apache': }

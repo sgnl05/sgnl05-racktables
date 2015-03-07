@@ -20,6 +20,8 @@ class racktables::apache (
   }
 
   class {'::apache::mod::php': }
+  class {'::apache::mod::auth_basic': }
+  class {'::apache::mod::authnz_ldap': }
 
   apache::vhost { "${vhost}-http":
     servername      => $vhost,
@@ -42,6 +44,7 @@ class racktables::apache (
     ssl             => true,
     ssl_cert        => $ssl_cert,
     ssl_key         => $ssl_key,
+    override        => 'AuthConfig',
     require         => Vcsrepo[$datadir],
   }
 

@@ -72,10 +72,8 @@ class racktables (
   validate_string($source)
 
   class { '::racktables::install':
-    secretfile  => $secretfile,
     release     => $release,
     datadir     => $datadir,
-    apacheuser  => $apacheuser,
     packages    => $packages,
     vcsprovider => $vcsprovider,
     source      => $source,
@@ -94,6 +92,12 @@ class racktables (
     ssl_cert => $ssl_cert,
     ssl_key  => $ssl_key,
     datadir  => $datadir,
+  }
+
+  class { '::racktables::config':
+    secretfile => $secretfile,
+    datadir    => $datadir,
+    apacheuser => $apacheuser,
   }
 
 }

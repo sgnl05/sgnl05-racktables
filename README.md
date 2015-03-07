@@ -20,7 +20,7 @@ This Puppet module installs RackTables, along with Apache, PHP, MySQL.
 
 RackTables is nifty and robust solution for datacenter and server room asset management. It helps document hardware assets, network addresses, space in racks, networks configuration and much much more.
 
-Use this module to install a new instance of RackTables. The module will also install Apache, PHP, MySQL and some other dependencies for RackTables (php packages mostly).
+Use this module to install a new instance of RackTables. The module will also install Apache, PHP, MySQL (optional) and some other dependencies for RackTables (php packages mostly).
 
 WARNING:
 Use this module on NEW servers! 
@@ -30,9 +30,9 @@ Existing databases, webserver configs and RackTables installations will be repla
 
 ### What racktables affects
 
-* Apache - Any existing config will be replaced or purged.
+* Apache - Any existing config will be purged or replaced.
 * MySQL - Existing databases and settings might be replaced.
-* RackTables - Existing RackTable files might be replaced
+* RackTables - Existing RackTable files might be replaced.
 
 ### Beginning with RackTables module
 
@@ -58,7 +58,7 @@ Handling the permissions of secret.php at installation step 3 and 4 of can be as
 
 #### Examples
 
-Install RackTables version 0.20.10 with a new local database:
+Install RackTables with a new local database:
 
 ```puppet
    class { '::racktables':

@@ -54,21 +54,11 @@ Default database settings are:
 
 These values can be changed by adding parameters 'mysqldb', 'mysqluser' and 'mysqluserpw' to the ::racktables class (See more [examples](#examples)).
 
-Handling the permissions of secret.php at installation step 3 and 4 of can be assisted by Puppet. Use an attribute named 'secretfile' on the ::racktables class and set it to "writable" on step 3 and "readonly" on step 4. Remember to run "puppet agent -t" on the target server after each of these steps.
+Handling the permissions of secret.php at installation step 3 and 4 of can be assisted by Puppet. Use parameter 'secretfile' on the ::racktables class and set it to "writable" on step 3 and "readonly" on step 4. Remember to run "puppet agent -t" on the target server after each of these steps.
 
 #### Examples
 
-Set a root password for your mysql installation (default password is "strongpassword" if undefined):
-
-```puppet
-   class { '::racktables':
-     vhost       => 'racktables.example.com',
-     release     => 'RackTables-0.20.10', 
-     mysqlrootpw => 'newstrongpassword',
-   }
-```
-
-Proper installation with recommended parameters:
+Install RackTables version 0.20.10 with all recommended parameters:
 
 ```puppet
    class { '::racktables':
@@ -107,7 +97,7 @@ In other words, after installation is done your class should look like this:
 #####`secretfile`
 
 Sets permissions to the inc/secret.php file for apache during setup. Set this attribute to "writable" while installing racktables and "readonly" after installation step 4. Setting this attibute to "absent" removes the file.
-Defaults to "undef", which results in permissions not being modified.
+Defaults to undef, which results in file/permissions not being modified.
 
 #####`vhost`
 
@@ -124,7 +114,7 @@ Defaults to 'undef', which results in the default repo being downloaded. After f
 #####`mysqlrootpw`
 
 Sets the root password on MySQL.
-Defaults to 'strongpassword'.
+Defaults to undef.
 
 #####`mysqluser`
 
@@ -133,7 +123,7 @@ Defaults to 'racktables_user'.
 
 #####`mysqluserpw`
 
-Sets the password for the "mysqluser".
+Sets the password for the user defined in param "mysqluser".
 Defaults to 'racktables_pass'. 
 
 #####`mysqldb`
@@ -146,15 +136,25 @@ Defaults to 'racktables_db'.
 Sets the name of the database to connect to.
 Defaults to 'localhost'.
 
-#####`datadir`
+#####`ssl_cert`
 
-Specifies the installation path of RackTables.
-Defaults to '/usr/local/share/RackTables'.
+Specifies the location of SSL certification.
+Defaults to whatever the puppetlabs-apache module defines as default.
+
+#####`ssl_key`
+
+Specifies the location of the SSL key.
+Defaults to whatever the puppetlabs-apache module defines as default.
 
 #####`apacheuser`
 
 Specifies the apache user. Used for setting permissions to inc/secret.php.
 Defaults to 'apache' for RedHat/CentOS and 'www-data' for Debian/Ubuntu.
+
+#####`datadir`
+
+Specifies the installation path of RackTables.
+Defaults to '/usr/local/share/RackTables'.
 
 #####`vcsprovider`
 
@@ -163,7 +163,8 @@ Defaults to 'git'.
 
 #####`source`
 
-Path to RackTables source. Defaults to 'https://github.com/RackTables/racktables.git'.
+Path to RackTables source.
+Defaults to 'https://github.com/RackTables/racktables.git'.
 
 ## Reference
 

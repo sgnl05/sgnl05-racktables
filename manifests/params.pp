@@ -9,20 +9,17 @@ class racktables::params {
   $mysqluserpw = 'racktables_pass'
   $mysqldb     = 'racktables_db'
   $mysqlhost   = 'localhost'
+  $datadir     = '/usr/local/share/RackTables'
   $vcsprovider = 'git'
   $source      = 'https://github.com/RackTables/racktables.git'
 
   case $::osfamily {
 
     'RedHat': {
-      $datadir    = '/usr/local/share/RackTables'
-      $docdir     = '/usr/local/share/doc/RackTables'
       $apacheuser = 'apache'
     }
 
     'Debian': {
-      $datadir    = '/usr/local/share/RackTables'
-      $docdir     = '/usr/local/share/doc/RackTables'
       $apacheuser = 'www-data'
     }
 

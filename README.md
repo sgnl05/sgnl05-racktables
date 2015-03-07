@@ -58,35 +58,33 @@ Handling the permissions of secret.php at installation step 3 and 4 of can be as
 
 #### Examples
 
-Install RackTables version 0.20.10 with all recommended parameters:
+Install RackTables version 0.20.10 with local database:
 
 ```puppet
    class { '::racktables':
      vhost       => 'racktables.example.com',
      release     => 'RackTables-0.20.10',
-     mysqlrootpw => 'make_a_strong_password',
-     mysqldb     => 'racktables',
-     mysqluser   => 'racktables',
-     mysqluserpw => 'make_another_strong_password',
-     mysqlhost   => 'localhost',
+     install_db  => true,
+     db_name     => 'racktables',
+     db_username => 'racktables',
+     db_password => 'make_a_strong_password',
    }
 ```
 
-When installation is complete, dont forget to set the attribute 'secretfile' to "readonly". You can also remove the 'mysqlrootpw' attribute, as it is now stored in /root/.my.cnf on the target server.
-
-In other words, after installation is done your class should look like this:
+Install RackTables with remote database:
 
 ```puppet
    class { '::racktables':
      vhost       => 'racktables.example.com',
      release     => 'RackTables-0.20.10',
-     mysqldb     => 'racktables',
-     mysqluser   => 'racktables',
-     mysqluserpw => 'make_another_strong_password',
-     mysqlhost   => 'localhost',
-     secretfile  => 'readonly',
+     db_name     => 'example_db_name',
+     db_username => 'example_username',
+     db_password => 'example_password',
+     db_host     => 'database.example.com',
    }
 ```
+
+Make sure there's a DNS entry for your vhost. After 'puppet agent -t' run on target machine, go to the vhost URL and follow the onscreen installation instructions.
 
 ## Usage
 
@@ -96,8 +94,17 @@ In other words, after installation is done your class should look like this:
 
 #####`secretfile`
 
-Sets permissions to the inc/secret.php file for apache during setup. Set this attribute to "writable" while installing racktables and "readonly" after installation step 4. Setting this attibute to "absent" removes the file.
-Defaults to undef, which results in file/permissions not being modified.
+Handles the inc/secret.php file. This can be put to good use during first time installation.
+
+Available settings for this parameter are: "w" (writable), "r" (readonly) , "template" and "absent".
+
+Set this attribute to "w" while installing RackTables and "r" (for readonly) after installation step 4.
+
+You can also set this to "template" to use the template included with this module.
+
+"absent" setting removes the file.
+
+Defaults to undef, which results in file not being created or permissions not being modified.
 
 #####`vhost`
 
@@ -111,30 +118,34 @@ The RackTables project on GitHub has (so far) tagged every release with "RackTab
 You can automatically upgrade the racktables version by modifying this attribute to a higher version number.
 Defaults to 'undef', which results in the default repo being downloaded. After first download, 'undef' setting will not modify local files even if the remote repo is updated.
 
-#####`mysqlrootpw`
+#####`install_db`
+Boolean. Set to 'true' to make this module install a mysql database on the target server. 
+Defaults to 'false'.
 
-Sets the root password on MySQL.
-Defaults to undef.
+#####`db_username`
 
-#####`mysqluser`
-
-Sets the mysql user for the racktables database.
+Sets the mysql username for the racktables database.
 Defaults to 'racktables_user'.
 
-#####`mysqluserpw`
+#####`db_password`
 
 Sets the password for the user defined in param "mysqluser".
 Defaults to 'racktables_pass'. 
 
-#####`mysqldb`
+#####`db_name`
 
 Sets the name of the database for racktables.
 Defaults to 'racktables_db'.
 
-#####`mysqlhost`
+#####`db_host`
 
 Sets the name of the database to connect to.
 Defaults to 'localhost'.
+
+#####`db_rootpw`
+
+Sets the root password on MySQL.
+Defaults to undef.
 
 #####`ssl_cert`
 
@@ -156,6 +167,15 @@ Defaults to 'apache' for RedHat/CentOS and 'www-data' for Debian/Ubuntu.
 Specifies the installation path of RackTables.
 Defaults to '/usr/local/share/RackTables'.
 
+#####`packages`
+
+Defines what prerequisities to install.
+Defaults are operating system spesific. See params.pp for details.
+
+#####`repoensure`
+Specify the ensure parameter for vcsrepo. Setting this to 'latest' will always pull new commits to the GitHub repo, which is usefull for development environments. Use only 'present' for production installations!
+Defaults to 'present'. Valid values are 'present' and 'latest'.
+
 #####`vcsprovider`
 
 Defines what vcs system to use for downloading RackTables.
@@ -163,7 +183,7 @@ Defaults to 'git'.
 
 #####`source`
 
-Path to RackTables source.
+Path to the RackTables repo.
 Defaults to 'https://github.com/RackTables/racktables.git'.
 
 ## Reference
@@ -176,6 +196,7 @@ Defaults to 'https://github.com/RackTables/racktables.git'.
 * `racktables::apache`: Installs Apache and a spesified vhost
 * `racktables::mysql`: Installs MySQL and sets up an empty database
 * `racktables::install`: Pulls and installs RackTables from GitHub (or other specified source)
+* `racktables::config`: Handles the inc/secret.php file
 
 ####Private Classes
 

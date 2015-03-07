@@ -17,7 +17,7 @@ class racktables::mysql (
     root_password => $db_rootpw,
   }
 
-  mysql::db { $mysqldb :
+  mysql::db { $db_name :
     user     => $db_username,
     password => $db_password,
     host     => $db_host,

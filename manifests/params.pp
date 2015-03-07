@@ -8,7 +8,6 @@ class racktables::params {
   $mysqldb     = 'racktables_db'
   $mysqlhost   = 'localhost'
   $datadir     = '/usr/local/share/RackTables'
-  $docdir      = '/usr/local/share/doc/RackTables'
   $vcsprovider = 'git'
   $source      = 'https://github.com/RackTables/racktables.git'
 

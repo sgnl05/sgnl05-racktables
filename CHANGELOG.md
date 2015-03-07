@@ -1,4 +1,4 @@
-### 0.3.0
+### 0.3.0 2015-03-07
         new feature: SSL certificates (#4)
         new feature: template file for secret.inc (#5)
         update: make local database install optional (#6)

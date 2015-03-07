@@ -11,7 +11,7 @@
         update: changed secret file handling.
         update: changed metadata.json requirements for puppetlabs-mysql to version 3.1.0. This should fix CentOS 7 support (not tested).
 
-### 0.1.4 2014-09-05 Release 0.1.4
+### 0.1.4 2014-09-05
         update: added php5-curl dependency for Debian/Ubuntu.
 
 ### 0.1.3 2014-09-05
@@ -22,7 +22,7 @@
         update: added support for Debian 7 by setting 'mpm_module' to "prefork" when calling apache install.
         workaround: Removed Redhat/CentOS 7 support in metadata.json as current puppetlabs-mysql version is broken on CentOS 7. (#1)
 
-### 0.1.1 2014-07-31 Release 0.1.1
+### 0.1.1 2014-07-31
         update: better documentation
 
 ### 0.1.0 2014-07-30

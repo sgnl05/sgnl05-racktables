@@ -1,58 +1,29 @@
-## 2015-03-04 Release 0.2.1
+### 0.3.0
+        new feature: SSL certificates (#4)
+        new feature: template file for secret.inc
 
-###Bugfix
+### 0.2.1 2015-03-04
+        bugfix: root password for MySQL was always set to '$mysqlrootpw'.
+        update: use public classes for apache, mysql and racktables install
 
-Root password for MySQL was always set to '$mysqlrootpw'.
+### 0.2.0 2015-02-05
+        new feature: added ability to select what RackTables version to download.
+        update: changed secret file handling.
+        update: changed metadata.json requirements for puppetlabs-mysql to version 3.1.0. This should fix CentOS 7 support (not tested).
 
-###Updates
+### 0.1.4 2014-09-05 Release 0.1.4
+        update: added php5-curl dependency for Debian/Ubuntu.
 
-Use public classes for apache, mysql and racktables install
+### 0.1.3 2014-09-05
+        update: php5-ldap dependency for Debian/Ubuntu. Thanks Jens Rosenbloom (#2)
+        update: changed attribute name 'secretwriteable' to 'secretfile' and changed the installation routine to be more intuitive regarding this file.
 
-## 2015-02-05 Release 0.2.0
+### 0.1.2 2014-08-01
+        update: added support for Debian 7 by setting 'mpm_module' to "prefork" when calling apache install.
+        workaround: Removed Redhat/CentOS 7 support in metadata.json as current puppetlabs-mysql version is broken on CentOS 7. (#1)
 
-###Updates
+### 0.1.1 2014-07-31 Release 0.1.1
+        update: better documentation
 
-Added ability to select what RackTables version to download.
-
-Changed secret file handling.
-
-Updated puppetlabs-mysql requirements to version 3.1.0. This should fix CentOS 7 support (not tested).
-
-
-## 2014-09-05 Release 0.1.4
-
-###Updates
-
-php5-curl dependency for Debian/Ubuntu.
-
-
-## 2014-09-05 Release 0.1.3
-
-###Updates
-
-php5-ldap dependency for Debian/Ubuntu. Jens Rosenbloom (#2)
-
-Changed attribute name 'secretwriteable' to 'secretfile' and changed the installation routine to be more intuitive regarding this file.  
-
-
-## 2014-08-01 Release 0.1.2
-
-###Updates
-
-Added support for Debian 7 by setting 'mpm_module' to "prefork" when calling apache install.
-
-Removed Redhat/CentOS 7 support in metadata.json as current puppetlabs-mysql version is broken on CentOS 7.
-
-
-## 2014-07-31 Release 0.1.1
-
-###Summary
-
-Updated documentation.
-
-
-## 2014-07-30 Release 0.1.0
-
-###Summary
-
-First release.
+### 0.1.0 2014-07-30
+        initial release

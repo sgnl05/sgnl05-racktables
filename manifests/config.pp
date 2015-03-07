@@ -1,9 +1,13 @@
 # Installs RackTables
 class racktables::config (
   $secretfile = $::racktables::secretfile,
-  $datadir    = $::racktables::datadir,
   $apacheuser = $::racktables::apacheuser,
+  $datadir    = $::racktables::datadir,
 ) {
+
+  validate_string($secretfile)
+  validate_string($apacheuser)
+  validate_string($datadir)
 
   case $secretfile {
 

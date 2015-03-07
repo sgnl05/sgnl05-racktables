@@ -1,10 +1,15 @@
 # Installs apache and racktables vhost
 class racktables::apache (
   $vhost    = $::racktables::vhost,
-  $datadir  = $::racktables::datadir,
   $ssl_cert = $::apache::default_ssl_cert,
   $ssl_key  = $::apache::default_ssl_key,
+  $datadir  = $::racktables::datadir,
 ) {
+
+  validate_string($vhost)
+  validate_string($ssl_cert)
+  validate_string($ssl_key)
+  validate_string($datadir)
 
   class { '::apache':
     default_mods        => false,

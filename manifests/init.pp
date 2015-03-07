@@ -56,21 +56,8 @@ class racktables (
   $source      = $racktables::params::source,
 ) inherits racktables::params {
 
-  validate_string($secretfile)
-  validate_string($release)
   validate_string($vhost)
-  validate_string($mysqlrootpw)
-  validate_string($mysqluser)
-  validate_string($mysqluserpw)
-  validate_string($mysqldb)
-  validate_string($mysqlhost)
-  validate_string($ssl_cert)
-  validate_string($ssl_key)
-  validate_string($apacheuser)
   validate_string($datadir)
-  validate_array($packages)
-  validate_string($vcsprovider)
-  validate_string($source)
 
   class { '::racktables::mysql':
     mysqlrootpw => $mysqlrootpw,

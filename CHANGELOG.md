@@ -1,6 +1,7 @@
 ### 0.3.0
         new feature: SSL certificates (#4)
-        new feature: template file for secret.inc
+        new feature: template file for secret.inc (#5)
+        update: make local database install optional (#6)
 
 ### 0.2.1 2015-03-04
         bugfix: root password for MySQL was always set to '$mysqlrootpw'.

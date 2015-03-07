@@ -1,8 +1,6 @@
 # Params
 class racktables::params {
 
-  $secretfile  = undef
-  $release     = undef
   $vhost       = 'racktables.example.org'
   $mysqlrootpw = 'strongpassword'
   $mysqluser   = 'racktables_user'

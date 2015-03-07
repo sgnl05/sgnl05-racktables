@@ -38,8 +38,8 @@
 # Copyright 2014-2015 Gjermund Jensvoll
 #
 class racktables (
-  $secretfile  = $racktables::params::secretfile,
-  $release     = $racktables::params::release,
+  $secretfile  = undef,
+  $release     = undef,
   $vhost       = $racktables::params::vhost,
   $mysqlrootpw = $racktables::params::mysqlrootpw,
   $mysqluser   = $racktables::params::mysqluser,

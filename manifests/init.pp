@@ -41,7 +41,7 @@ class racktables (
   $secretfile  = undef,
   $release     = undef,
   $vhost       = $racktables::params::vhost,
-  $install_db  = false,
+  $install_db  = true,
   $db_username = $racktables::params::db_username,
   $db_password = $racktables::params::db_password,
   $db_name     = $racktables::params::db_name,

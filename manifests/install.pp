@@ -3,9 +3,14 @@ class racktables::install (
   $release     = $::racktables::release,
   $datadir     = $::racktables::datadir,
   $packages    = $::racktables::packages,
+  $repoensure  = $::racktables::repoensure,
   $vcsprovider = $::racktables::vcsprovider,
   $source      = $::racktables::source,
 ) {
+
+  validate_re($repoensure, '^(present|latest)$',
+  "${repoensure} is not supported for repoensure.
+  Allowed values are 'present' and 'latest'.")
 
   package { $packages :
     ensure => present,
@@ -18,7 +23,7 @@ class racktables::install (
   # Pull RackTables from source
   if $release == undef {
     vcsrepo { $datadir:
-      ensure   => present,
+      ensure   => $repoensure,
       provider => $vcsprovider,
       source   => $source,
       require  => Package[$vcsprovider],
@@ -26,7 +31,7 @@ class racktables::install (
   }
   else {
     vcsrepo { $datadir :
-      ensure   => latest,
+      ensure   => $repoensure,
       provider => $vcsprovider,
       source   => $source,
       revision => $release,

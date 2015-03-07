@@ -7,6 +7,7 @@ class racktables::params {
   $mysqldb     = 'racktables_db'
   $mysqlhost   = 'localhost'
   $datadir     = '/usr/local/share/RackTables'
+  $repoensure  = 'present'
   $vcsprovider = 'git'
   $source      = 'https://github.com/RackTables/racktables.git'
 

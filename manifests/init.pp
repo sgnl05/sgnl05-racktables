@@ -46,8 +46,10 @@ class racktables (
   $mysqluserpw = $racktables::params::mysqluserpw,
   $mysqldb     = $racktables::params::mysqldb,
   $mysqlhost   = $racktables::params::mysqlhost,
-  $datadir     = $racktables::params::datadir,
+  $ssl_cert    = undef,
+  $ssl_key     = undef,
   $apacheuser  = $racktables::params::apacheuser,
+  $datadir     = $racktables::params::datadir,
   $packages    = $racktables::params::packages,
   $vcsprovider = $racktables::params::vcsprovider,
   $source      = $racktables::params::source,
@@ -61,8 +63,10 @@ class racktables (
   validate_string($mysqluserpw)
   validate_string($mysqldb)
   validate_string($mysqlhost)
-  validate_string($datadir)
+  validate_string($ssl_cert)
+  validate_string($ssl_key)
   validate_string($apacheuser)
+  validate_string($datadir)
   validate_array($packages)
   validate_string($vcsprovider)
   validate_string($source)
@@ -86,8 +90,10 @@ class racktables (
   }
 
   class { '::racktables::apache':
-    vhost   => $vhost,
-    datadir => $datadir,
+    vhost    => $vhost,
+    ssl_cert => $ssl_cert,
+    ssl_key  => $ssl_key,
+    datadir  => $datadir,
   }
 
 }

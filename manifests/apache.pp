@@ -1,7 +1,9 @@
 # Installs apache and racktables vhost
 class racktables::apache (
-  $vhost   = $::racktables::vhost,
-  $datadir = $::racktables::datadir,
+  $vhost    = $::racktables::vhost,
+  $datadir  = $::racktables::datadir,
+  $ssl_cert = $::apache::default_ssl_cert,
+  $ssl_key  = $::apache::default_ssl_key,
 ) {
 
   class { '::apache':
@@ -33,6 +35,8 @@ class racktables::apache (
     access_log_file => "${vhost}_access_ssl_log",
     error_log_file  => "${vhost}_error_ssl_log",
     ssl             => true,
+    ssl_cert        => $ssl_cert,
+    ssl_key         => $ssl_key,
     require         => Vcsrepo[$datadir],
   }
 

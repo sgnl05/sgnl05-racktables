@@ -1,8 +1,8 @@
 # Installs apache and racktables vhost
 class racktables::apache (
-  $vhost   = $racktables::params::vhost,
-  $datadir = $racktables::params::datadir,
-) inherits racktables::params {
+  $vhost   = $::racktables::vhost,
+  $datadir = $::racktables::datadir,
+) {
 
   class { '::apache':
     default_mods        => false,

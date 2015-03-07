@@ -1,12 +1,12 @@
 # Installs RackTables
 class racktables::install (
-  $secretfile  = $racktables::params::secretfile,
-  $release     = $racktables::params::release,
-  $datadir     = $racktables::params::datadir,
-  $apacheuser  = $racktables::params::apacheuser,
-  $vcsprovider = $racktables::params::vcsprovider,
-  $source      = $racktables::params::source,
-) inherits racktables::params {
+  $secretfile  = $::racktables::secretfile,
+  $release     = $::racktables::release,
+  $datadir     = $::racktables::datadir,
+  $apacheuser  = $::racktables::apacheuser,
+  $vcsprovider = $::racktables::vcsprovider,
+  $source      = $::racktables::source,
+) {
 
   case $::osfamily {
 

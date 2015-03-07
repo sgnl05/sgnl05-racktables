@@ -1,11 +1,11 @@
 # Installs MySQL and RackTables database
 class racktables::mysql (
-  $mysqlrootpw = $racktables::params::mysqlrootpw,
-  $mysqldb     = $racktables::params::mysqldb,
-  $mysqluser   = $racktables::params::mysqluser,
-  $mysqluserpw = $racktables::params::mysqluserpw,
-  $mysqlhost   = $racktables::params::mysqlhost,
-) inherits racktables::params {
+  $mysqlrootpw = $::racktables::mysqlrootpw,
+  $mysqldb     = $::racktables::mysqldb,
+  $mysqluser   = $::racktables::mysqluser,
+  $mysqluserpw = $::racktables::mysqluserpw,
+  $mysqlhost   = $::racktables::mysqlhost,
+) {
 
   class { '::mysql::server':
     root_password => $mysqlrootpw,

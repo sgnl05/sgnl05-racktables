@@ -2,7 +2,6 @@
 class racktables::params {
 
   $vhost       = 'racktables.example.org'
-  $mysqlrootpw = 'strongpassword'
   $mysqluser   = 'racktables_user'
   $mysqluserpw = 'racktables_pass'
   $mysqldb     = 'racktables_db'

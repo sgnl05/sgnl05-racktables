@@ -41,7 +41,7 @@ class racktables (
   $secretfile  = undef,
   $release     = undef,
   $vhost       = $racktables::params::vhost,
-  $mysqlrootpw = $racktables::params::mysqlrootpw,
+  $mysqlrootpw = undef,
   $mysqluser   = $racktables::params::mysqluser,
   $mysqluserpw = $racktables::params::mysqluserpw,
   $mysqldb     = $racktables::params::mysqldb,

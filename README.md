@@ -58,7 +58,7 @@ Handling the permissions of secret.php at installation step 3 and 4 of can be as
 
 #### Examples
 
-Install RackTables version 0.20.10 with local database:
+Install RackTables version 0.20.10 with a new local database:
 
 ```puppet
    class { '::racktables':
@@ -71,7 +71,7 @@ Install RackTables version 0.20.10 with local database:
    }
 ```
 
-Install RackTables with remote database:
+Install RackTables, using a remote database with existing RackTables data:
 
 ```puppet
    class { '::racktables':
@@ -81,6 +81,7 @@ Install RackTables with remote database:
      db_username => 'example_username',
      db_password => 'example_password',
      db_host     => 'database.example.com',
+     secretfile  => 'template',
    }
 ```
 

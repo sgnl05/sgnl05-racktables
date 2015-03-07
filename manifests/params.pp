@@ -10,6 +10,7 @@ class racktables::params {
   $mysqldb     = 'racktables_db'
   $mysqlhost   = 'localhost'
   $datadir     = '/usr/local/share/RackTables'
+  $docdir      = '/usr/local/share/doc/RackTables'
   $vcsprovider = 'git'
   $source      = 'https://github.com/RackTables/racktables.git'
 
@@ -17,10 +18,27 @@ class racktables::params {
 
     'RedHat': {
       $apacheuser = 'apache'
+      $packages   = [
+        'php-mysql',
+        'php-ldap',
+        'php-snmp',
+        'php-pdo',
+        'php-gd',
+        'php-mbstring',
+        'php-bcmath',
+      ]
+
     }
 
     'Debian': {
       $apacheuser = 'www-data'
+      $packages   = [
+        'php5-mysql',
+        'php5-ldap',
+        'php5-snmp',
+        'php5-gd',
+        'php5-curl',
+      ]
     }
 
     default: {

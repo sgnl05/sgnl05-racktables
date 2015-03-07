@@ -4,44 +4,17 @@ class racktables::install (
   $release     = $::racktables::release,
   $datadir     = $::racktables::datadir,
   $apacheuser  = $::racktables::apacheuser,
+  $packages    = $::racktables::packages,
   $vcsprovider = $::racktables::vcsprovider,
   $source      = $::racktables::source,
 ) {
 
-  case $::osfamily {
+  package { $packages :
+    ensure => present,
+  }
 
-    'RedHat': {
-      package { [
-        $vcsprovider,
-        'php-mysql',
-        'php-ldap',
-        'php-pdo',
-        'php-gd',
-        'php-snmp',
-        'php-mbstring',
-        'php-bcmath',
-      ]:
-        ensure => present,
-      }
-    }
-
-    'Debian': {
-      package { [
-        $vcsprovider,
-        'php5-gd',
-        'php5-mysql',
-        'php5-snmp',
-        'php5-ldap',
-        'php5-curl',
-      ]:
-        ensure => present,
-      }
-    }
-
-    default: {
-      fail("${module_name} module is not supported on osfamily ${::osfamily}.")
-    }
-
+  package { $vcsprovider :
+    ensure => present,
   }
 
   # Pull RackTables from source
@@ -50,6 +23,7 @@ class racktables::install (
       ensure   => present,
       provider => $vcsprovider,
       source   => $source,
+      require  => Package[$vcsprovider],
     }
   }
   else {
@@ -58,14 +32,14 @@ class racktables::install (
       provider => $vcsprovider,
       source   => $source,
       revision => $release,
+      require  => Package[$vcsprovider],
     }
   }
 
   # Handle secret file
   case $secretfile {
 
-    default: {
-      # No action
+    default: { # No action
     }
 
     'readable', 'readonly', 'read', 'r': {

@@ -2,10 +2,10 @@
 class racktables::params {
 
   $vhost       = 'racktables.example.org'
-  $mysqluser   = 'racktables_user'
-  $mysqluserpw = 'racktables_pass'
-  $mysqldb     = 'racktables_db'
-  $mysqlhost   = 'localhost'
+  $db_username = 'racktables_user'
+  $db_password = 'racktables_pass'
+  $db_name     = 'racktables_db'
+  $db_host     = 'localhost'
   $datadir     = '/usr/local/share/RackTables'
   $repoensure  = 'present'
   $vcsprovider = 'git'

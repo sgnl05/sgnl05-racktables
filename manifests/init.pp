@@ -41,11 +41,12 @@ class racktables (
   $secretfile  = undef,
   $release     = undef,
   $vhost       = $racktables::params::vhost,
-  $mysqlrootpw = undef,
-  $mysqluser   = $racktables::params::mysqluser,
-  $mysqluserpw = $racktables::params::mysqluserpw,
-  $mysqldb     = $racktables::params::mysqldb,
-  $mysqlhost   = $racktables::params::mysqlhost,
+  $install_db  = false,
+  $db_username = $racktables::params::db_username,
+  $db_password = $racktables::params::db_password,
+  $db_name     = $racktables::params::db_name,
+  $db_host     = $racktables::params::db_host,
+  $db_rootpw   = undef,
   $ssl_cert    = undef,
   $ssl_key     = undef,
   $apacheuser  = $racktables::params::apacheuser,
@@ -57,14 +58,20 @@ class racktables (
 ) inherits racktables::params {
 
   validate_string($vhost)
+  validate_string($db_username)
+  validate_string($db_password)
+  validate_string($db_name)
+  validate_string($db_host)
   validate_string($datadir)
 
-  class { '::racktables::mysql':
-    mysqlrootpw => $mysqlrootpw,
-    mysqldb     => $mysqldb,
-    mysqluser   => $mysqluser,
-    mysqluserpw => $mysqluserpw,
-    mysqlhost   => $mysqlhost,
+  if $install_db == true {
+    class { '::racktables::mysql':
+      db_username => $db_username,
+      db_password => $db_password,
+      db_name     => $db_name,
+      db_host     => $db_host,
+      db_rootpw   => $db_rootpw,
+    }
   }
 
   class { '::racktables::apache':

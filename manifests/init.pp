@@ -26,7 +26,6 @@
 # class { '::racktables':
 #   vhost       => 'racktables.example.com',
 #   release     => 'RackTables-0.20.10',
-#   mysqlrootpw => 'change.me123XXXabc',
 # }
 #
 # === Authors
@@ -39,9 +38,9 @@
 #
 class racktables (
   $secretfile  = undef,
-  $release     = undef,
   $vhost       = $racktables::params::vhost,
-  $install_db  = true,
+  $release     = undef,
+  $install_db  = false,
   $db_username = $racktables::params::db_username,
   $db_password = $racktables::params::db_password,
   $db_name     = $racktables::params::db_name,

@@ -36,12 +36,13 @@ Existing databases, webserver configs and RackTables installations will be repla
 
 ### Beginning with RackTables module
 
-To install RackTables version 0.20.10 with the default parameters:
+To install RackTables version 0.20.10 with local database and default parameters:
 
 ```puppet
    class { '::racktables':
-     vhost   => 'racktables.example.com',
-     release => 'RackTables-0.20.10',
+     vhost       => 'racktables.example.com',
+     release     => 'RackTables-0.20.10',
+     install_db  => true,
    }
 ```
 
@@ -52,7 +53,7 @@ Default database settings are:
 * username: racktables_user
 * password: racktables_pass
 
-These values can be changed by adding parameters 'mysqldb', 'mysqluser' and 'mysqluserpw' to the ::racktables class (See more [examples](#examples)).
+These values can be changed by adding parameters 'db_name', 'db_username' and 'db_password' to the ::racktables class (See more [examples](#examples)).
 
 Handling the permissions of secret.php at installation step 3 and 4 of can be assisted by Puppet. Use parameter 'secretfile' on the ::racktables class and set it to "writable" on step 3 and "readonly" on step 4. Remember to run "puppet agent -t" on the target server after each of these steps.
 

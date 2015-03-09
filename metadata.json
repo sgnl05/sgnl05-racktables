@@ -1,6 +1,6 @@
 {
   "name": "sgnl05-racktables",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "author": "sgnl05",
   "summary": "Installs RackTables with all dependencies",
   "license": "Apache-2.0",

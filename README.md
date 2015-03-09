@@ -149,6 +149,18 @@ Defaults to 'localhost'.
 Sets the root password on MySQL.
 Defaults to undef.
 
+#####`user_auth_src`
+
+Sets the user_auth_src setting in inc/secret.php.
+See RackTables wiki on LDAP and SAML configuration for more information: http://wiki.racktables.org/
+Defaults to 'database'.
+
+#####`require_local_account`
+
+Sets the require_local_account setting in inc/secret.php.
+See RackTables wiki on LDAP and SAML configuration for more information: http://wiki.racktables.org/
+Defaults to true.
+
 #####`ssl_cert`
 
 Specifies the location of SSL certification.

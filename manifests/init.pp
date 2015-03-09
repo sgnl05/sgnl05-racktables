@@ -37,23 +37,25 @@
 # Copyright 2014-2015 Gjermund Jensvoll
 #
 class racktables (
-  $secretfile  = undef,
-  $vhost       = $racktables::params::vhost,
-  $release     = undef,
-  $install_db  = false,
-  $db_username = $racktables::params::db_username,
-  $db_password = $racktables::params::db_password,
-  $db_name     = $racktables::params::db_name,
-  $db_host     = $racktables::params::db_host,
-  $db_rootpw   = undef,
-  $ssl_cert    = undef,
-  $ssl_key     = undef,
-  $apacheuser  = $racktables::params::apacheuser,
-  $datadir     = $racktables::params::datadir,
-  $packages    = $racktables::params::packages,
-  $repoensure  = $racktables::params::repoensure,
-  $vcsprovider = $racktables::params::vcsprovider,
-  $source      = $racktables::params::source,
+  $secretfile            = undef,
+  $vhost                 = $racktables::params::vhost,
+  $release               = undef,
+  $install_db            = false,
+  $db_username           = $racktables::params::db_username,
+  $db_password           = $racktables::params::db_password,
+  $db_name               = $racktables::params::db_name,
+  $db_host               = $racktables::params::db_host,
+  $db_rootpw             = undef,
+  $user_auth_src         = $racktables::params::user_auth_src,
+  $require_local_account = $racktables::params::require_local_account,
+  $ssl_cert              = undef,
+  $ssl_key               = undef,
+  $apacheuser            = $racktables::params::apacheuser,
+  $datadir               = $racktables::params::datadir,
+  $packages              = $racktables::params::packages,
+  $repoensure            = $racktables::params::repoensure,
+  $vcsprovider           = $racktables::params::vcsprovider,
+  $source                = $racktables::params::source,
 ) inherits racktables::params {
 
   validate_string($vhost)
@@ -61,6 +63,10 @@ class racktables (
   validate_string($db_password)
   validate_string($db_name)
   validate_string($db_host)
+  validate_re($user_auth_src, '^(database|ldap|httpd)$',
+  "${user_auth_src} is not supported for user_auth_src.
+  Allowed values are 'database', 'ldap' and 'httpd'.")
+  validate_bool($require_local_account)
   validate_string($datadir)
 
   if $install_db == true {

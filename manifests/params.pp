@@ -1,15 +1,17 @@
 # Params
 class racktables::params {
 
-  $vhost       = 'racktables.example.org'
-  $db_username = 'racktables_user'
-  $db_password = 'racktables_pass'
-  $db_name     = 'racktables_db'
-  $db_host     = 'localhost'
-  $datadir     = '/usr/local/share/RackTables'
-  $repoensure  = 'present'
-  $vcsprovider = 'git'
-  $source      = 'https://github.com/RackTables/racktables.git'
+  $vhost                 = 'racktables.example.org'
+  $db_username           = 'racktables_user'
+  $db_password           = 'racktables_pass'
+  $db_name               = 'racktables_db'
+  $db_host               = 'localhost'
+  $user_auth_src         = 'database'
+  $require_local_account = true
+  $datadir               = '/usr/local/share/RackTables'
+  $repoensure            = 'present'
+  $vcsprovider           = 'git'
+  $source                = 'https://github.com/RackTables/racktables.git'
 
   case $::osfamily {
 

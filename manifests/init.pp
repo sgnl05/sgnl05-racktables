@@ -48,6 +48,10 @@ class racktables (
   $db_rootpw             = undef,
   $user_auth_src         = $racktables::params::user_auth_src,
   $require_local_account = $racktables::params::require_local_account,
+  $pdo_bufsize           = undef,
+  $ldap_options          = undef,
+  $saml_options          = undef,
+  $helpdesk_banner       = undef,
   $ssl_cert              = undef,
   $ssl_key               = undef,
   $apacheuser            = $racktables::params::apacheuser,
@@ -67,6 +71,10 @@ class racktables (
   "${user_auth_src} is not supported for user_auth_src.
   Allowed values are 'database', 'http', 'ldap' and 'saml'.")
   validate_bool($require_local_account)
+  validate_string($pdo_bufsize)
+  if $ldap_options != undef { validate_hash($ldap_options) }
+  if $saml_options != undef { validate_hash($saml_options) }
+  validate_string($helpdesk_banner)
   validate_absolute_path($datadir)
 
   if $install_db == true {

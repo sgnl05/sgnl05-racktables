@@ -1,5 +1,7 @@
-### 0.3.1
+### 0.3.1 2015-03-09
 bugfix: fix warning "Could not look up qualified variable '::apache::default_ssl_cert'; class ::apache has not been evaluated" on Puppet version 3.4.x.
+update: added $user_auth_src and $require_local_account settings to template
+update: Better parameter validations
 
 ### 0.3.0 2015-03-07
 new feature: SSL certificates (#4)

@@ -67,7 +67,7 @@ class racktables (
   "${user_auth_src} is not supported for user_auth_src.
   Allowed values are 'database', 'ldap' and 'httpd'.")
   validate_bool($require_local_account)
-  validate_string($datadir)
+  validate_absolute_path($datadir)
 
   if $install_db == true {
     class { '::racktables::mysql':

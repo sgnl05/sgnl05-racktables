@@ -63,9 +63,9 @@ class racktables (
   validate_string($db_password)
   validate_string($db_name)
   validate_string($db_host)
-  validate_re($user_auth_src, '^(database|ldap|httpd)$',
+  validate_re($user_auth_src, '^(database|httpd|ldap|saml)$',
   "${user_auth_src} is not supported for user_auth_src.
-  Allowed values are 'database', 'ldap' and 'httpd'.")
+  Allowed values are 'database', 'http', 'ldap' and 'saml'.")
   validate_bool($require_local_account)
   validate_absolute_path($datadir)
 

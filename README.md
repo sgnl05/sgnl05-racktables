@@ -110,66 +110,140 @@ Defaults to undef, which results in file not being created or permissions not be
 
 #####`vhost`
 
-The virtual host address to use for your racktables installation. Requires a valid DNS entry.
+String. The virtual host address to use for your racktables installation. Requires a valid DNS entry.
 Defaults to 'racktables.example.com'.
 
 #####`release`
 
-Selects what RackTables version to download. The version is pulled from https://github.com/RackTables/racktables/tree/REVISION (Revision = Git revision TAG).
+String. Selects what RackTables version to download. The version is pulled from https://github.com/RackTables/racktables/tree/REVISION (Revision = Git revision TAG).
 The RackTables project on GitHub has (so far) tagged every release with "RackTables-[version]".
 You can automatically upgrade the racktables version by modifying this attribute to a higher version number.
 Defaults to 'undef', which results in the default repo being downloaded. After first download, 'undef' setting will not modify local files even if the remote repo is updated.
 
 #####`install_db`
+
 Boolean. Set to 'true' to make this module install a mysql database on the target server. 
 Defaults to 'false'.
 
 #####`db_username`
 
-Sets the mysql username for the racktables database.
+String. Sets the mysql username for the racktables database.
 Defaults to 'racktables_user'.
 
 #####`db_password`
 
-Sets the password for the user defined in param "mysqluser".
+String. Sets the password for the user defined in param "mysqluser".
 Defaults to 'racktables_pass'. 
 
 #####`db_name`
 
-Sets the name of the database for racktables.
+String. Sets the name of the database for racktables.
 Defaults to 'racktables_db'.
 
 #####`db_host`
 
-Sets the name of the database to connect to.
+String. Sets the name of the database to connect to.
 Defaults to 'localhost'.
 
 #####`db_rootpw`
 
-Sets the root password on MySQL.
+String. Sets the root password on MySQL.
 Defaults to undef.
 
 #####`user_auth_src`
 
-Sets the user_auth_src setting in inc/secret.php.
-See RackTables wiki on LDAP and SAML configuration for more information: http://wiki.racktables.org/
+String. "$user_auth_src" setting in inc/secret.php.
+Default setting is to authenticate users locally, but it is possible to
+employ existing LDAP or Apache user accounts. Check RackTables wiki for
+more information, in particular, this page for LDAP configuration details:
+http://wiki.racktables.org/index.php?title=LDAP
 Defaults to 'database'.
 
 #####`require_local_account`
 
-Sets the require_local_account setting in inc/secret.php.
+String. "$require_local_account" setting in inc/secret.php.
 See RackTables wiki on LDAP and SAML configuration for more information: http://wiki.racktables.org/
 Defaults to true.
+
+#####`pdo_bufsize`
+
+String. "$pdo_bufsize" setting in inc/secret.php. 
+Setting MySQL client buffer size may be required to make downloading work for
+larger files, but it does not work with mysqlnd.
+Example: '50 * 1024 * 1024'
+Defaults to undef.
+
+#####`ldap_options`
+
+Hash. "$LDAP_options" setting in inc/secret.php.
+See http://wiki.racktables.org/index.php?title=LDAP for details.
+Example class:
+
+```puppet
+   class { '::racktables':
+     vhost                 => 'racktables.example.com',
+     release               => 'RackTables-0.20.10',
+     user_auth_src         => 'ldap',
+     require_local_account => false,
+     ldap_options          => {
+       'server' => 'localhost',
+       'domain' => 'example.com',
+       'search_attr' => '',
+       'search_dn' => '',
+       'search_bind_rdn' => 'NULL',
+       'search_bind_password' => 'NULL',
+       'displayname_attrs' => '',
+       'options' => 'array (LDAP_OPT_PROTOCOL_VERSION => 3)',
+       'use_tls' => '2',
+     }
+   }
+```
+
+Defaults to undef.
+
+#####`saml_options`
+
+Hash. "$SAML_options" setting in inc/secret.php.
+See http://wiki.racktables.org/index.php?title=SAML for details.
+Example class:
+
+```puppet
+   class { '::racktables':
+     vhost                 => 'racktables.example.com',
+     release               => 'RackTables-0.20.10',
+     user_auth_src         => 'ldap',
+     require_local_account => false,
+     saml_options          => {
+       'simplesamlphp_basedir' => '../simplesaml',
+       'sp_profile' => 'default-sp',
+       'usernameAttribute' => 'eduPersonPrincipName',
+       'fullnameAttribute' => 'fullName',
+       'groupListAttribute' => 'memberOf',
+     }
+   }
+```
+
+Defaults to undef.
+
+#####`helpdesk_banner`
+
+String. "$helpdesk_banner" setting in inc/secret.php.
+This HTML banner is intended to assist users in dispatching their issues
+to the local tech support service. Its text (in its verbatim form) will
+be appended to assorted error messages visible in user's browser (including
+"not authenticated" message). Beware of placing any sensitive information
+here, it will be readable by unauthorized visitors.
+Defaults to undef.
 
 #####`ssl_cert`
 
 Specifies the location of SSL certification.
-Defaults to whatever the puppetlabs-apache module defines as default.
+Defaults to undef.
 
 #####`ssl_key`
 
 Specifies the location of the SSL key.
-Defaults to whatever the puppetlabs-apache module defines as default.
+Defaults to undef.
 
 #####`apacheuser`
 

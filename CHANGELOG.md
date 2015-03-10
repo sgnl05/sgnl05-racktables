@@ -1,4 +1,4 @@
-### 0.3.2 
+### 0.3.2 2015-03-10
     update: template file for inc/secret.php complete (#7)
 
 ### 0.3.1 2015-03-09

@@ -211,7 +211,7 @@ Example class:
    class { '::racktables':
      vhost                 => 'racktables.example.com',
      release               => 'RackTables-0.20.10',
-     user_auth_src         => 'ldap',
+     user_auth_src         => 'saml',
      require_local_account => false,
      saml_options          => {
        'simplesamlphp_basedir' => '../simplesaml',

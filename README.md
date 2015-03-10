@@ -177,7 +177,7 @@ Defaults to undef.
 
 Hash. "$LDAP_options" setting in inc/secret.php.
 See http://wiki.racktables.org/index.php?title=LDAP for details.
-Example class:
+Defaults to undef. Example class:
 
 ```puppet
    class { '::racktables':
@@ -199,13 +199,11 @@ Example class:
    }
 ```
 
-Defaults to undef.
-
 #####`saml_options`
 
 Hash. "$SAML_options" setting in inc/secret.php.
 See http://wiki.racktables.org/index.php?title=SAML for details.
-Example class:
+Defaults to undef. Example class:
 
 ```puppet
    class { '::racktables':
@@ -222,8 +220,6 @@ Example class:
      }
    }
 ```
-
-Defaults to undef.
 
 #####`helpdesk_banner`
 

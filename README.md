@@ -40,9 +40,9 @@ To install RackTables version 0.20.10 with local database and default parameters
 
 ```puppet
    class { '::racktables':
-     vhost       => 'racktables.example.com',
-     release     => 'RackTables-0.20.10',
-     install_db  => true,
+     vhost      => 'racktables.example.com',
+     release    => 'RackTables-0.20.10',
+     install_db => true,
    }
 ```
 

@@ -233,41 +233,41 @@ Defaults to undef.
 
 #####`ssl_cert`
 
-Specifies the location of SSL certification.
+String. Specifies the location of SSL certification.
 Defaults to undef.
 
 #####`ssl_key`
 
-Specifies the location of the SSL key.
+String. Specifies the location of the SSL key.
 Defaults to undef.
 
 #####`apacheuser`
 
-Specifies the apache user. Used for setting permissions to inc/secret.php.
+String. Specifies the apache user. Used for setting permissions to inc/secret.php.
 Defaults to 'apache' for RedHat/CentOS and 'www-data' for Debian/Ubuntu.
 
 #####`datadir`
 
-Specifies the installation path of RackTables.
+String. Specifies the installation path of RackTables.
 Defaults to '/usr/local/share/RackTables'.
 
 #####`packages`
 
-Defines what prerequisities to install.
+Array. Defines what prerequisities to install.
 Defaults are operating system spesific. See params.pp for details.
 
 #####`repoensure`
-Specify the ensure parameter for vcsrepo. Setting this to 'latest' will always pull new commits to the GitHub repo, which is usefull for development environments. Use only 'present' for production installations!
+String. Specify the ensure parameter for vcsrepo. Setting this to 'latest' will always pull new commits to the GitHub repo, which is usefull for development environments. Use only 'present' for production installations!
 Defaults to 'present'. Valid values are 'present' and 'latest'.
 
 #####`vcsprovider`
 
-Defines what vcs system to use for downloading RackTables.
+String. Defines what vcs system to use for downloading RackTables.
 Defaults to 'git'.
 
 #####`source`
 
-Path to the RackTables repo.
+String. URL to the RackTables repo.
 Defaults to 'https://github.com/RackTables/racktables.git'.
 
 ## Reference

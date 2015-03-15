@@ -186,15 +186,15 @@ Defaults to undef. Example class:
      user_auth_src         => 'ldap',
      require_local_account => false,
      ldap_options          => {
-       'server' => 'localhost',
-       'domain' => 'example.com',
-       'search_attr' => '',
-       'search_dn' => '',
-       'search_bind_rdn' => 'NULL',
+       'server'               => 'localhost',
+       'domain'               => 'example.com',
+       'search_attr'          => '',
+       'search_dn'            => '',
+       'search_bind_rdn'      => 'NULL',
        'search_bind_password' => 'NULL',
-       'displayname_attrs' => '',
-       'options' => 'array (LDAP_OPT_PROTOCOL_VERSION => 3)',
-       'use_tls' => '2',
+       'displayname_attrs'    => '',
+       'options'              => 'array (LDAP_OPT_PROTOCOL_VERSION => 3)',
+       'use_tls'              => '2',
      }
    }
 ```
@@ -213,10 +213,10 @@ Defaults to undef. Example class:
      require_local_account => false,
      saml_options          => {
        'simplesamlphp_basedir' => '../simplesaml',
-       'sp_profile' => 'default-sp',
-       'usernameAttribute' => 'eduPersonPrincipName',
-       'fullnameAttribute' => 'fullName',
-       'groupListAttribute' => 'memberOf',
+       'sp_profile'            => 'default-sp',
+       'usernameAttribute'     => 'eduPersonPrincipName',
+       'fullnameAttribute'     => 'fullName',
+       'groupListAttribute'    => 'memberOf',
      }
    }
 ```

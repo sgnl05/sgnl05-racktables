@@ -46,7 +46,7 @@ To install RackTables version 0.20.10 with local database and default parameters
    }
 ```
 
-As soon as Puppet is done installing, go to vhost address and append ?module=installer to the vhost URL (Example URL: https://racktables.example.com/?module=installer). From there follow the RackTables installation steps (7 in total).
+As soon as Puppet is done installing RackTables, go to the vhost address and append ?module=installer to the URL (Example URL: https://racktables.example.com/?module=installer). From there follow the RackTables installation steps (7 in total).
 
 Default database settings are:
 * database: racktables_db

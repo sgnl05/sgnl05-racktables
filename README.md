@@ -254,7 +254,7 @@ Defaults to '/usr/local/share/RackTables'.
 #####`packages`
 
 Array. Defines what prerequisities to install.
-Defaults are operating system spesific. See params.pp for details.
+Defaults are operating system specific. See params.pp for details.
 
 #####`repoensure`
 String. Specify the ensure parameter for vcsrepo. Setting this to 'latest' will always pull new commits to the GitHub repo, which is usefull for development environments. Use only 'present' for production installations!
@@ -277,7 +277,7 @@ Defaults to 'https://github.com/RackTables/racktables.git'.
 ####Public Classes
 
 * `racktables`: Starts the module and calls racktables::apache, racktables::mysql and racktables::install
-* `racktables::apache`: Installs Apache and a spesified vhost
+* `racktables::apache`: Installs Apache and a specified vhost
 * `racktables::mysql`: Installs MySQL and sets up an empty database
 * `racktables::install`: Pulls and installs RackTables from GitHub (or other specified source)
 * `racktables::config`: Handles the inc/secret.php file

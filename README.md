@@ -55,7 +55,16 @@ Default database settings are:
 
 These values can be changed by adding parameters 'db_name', 'db_username' and 'db_password' to the ::racktables class (See more [examples](#examples)).
 
-Handling the permissions of secret.php at installation step 3 and 4 of can be assisted by Puppet. Use parameter 'secretfile' on the ::racktables class and set it to "writable" on step 3 and "readonly" on step 4. Remember to run "puppet agent -t" on the target server after each of these steps.
+Handling the permissions of secret.php at installation step 3 and 4 of can be assisted by Puppet. Use parameter 'secretfile' on the ::racktables class and set it to "writable" on step 3 and "readonly" on step 4. Remember to run "puppet agent -t" on the target server after each of these steps. If you have an existing secretfile or template, the default behavior of 'secretfile' is to accept the contents as a string. For instance: 
+
+```puppet
+	class { '::racktables':
+		vhost	      => 'racktables.example.com',
+		release     => 'RackTables-0.20.10',
+		secretfile  => file('/path/to/file'),
+	}
+```
+		
 
 #### Examples
 
@@ -98,15 +107,16 @@ Make sure there's a DNS entry for your vhost. After 'puppet agent -t' run on tar
 
 Handles the inc/secret.php file. This can be put to good use during first time installation.
 
-Available settings for this parameter are: "w" (writable), "r" (readonly) , "template" and "absent".
+Available settings for this parameter are: 
+	* "w" (writable) 
+	* "r" (readonly) 
+	(these are useful for configuring Racktables manually through the web browser
+	* "template" (uses the included default template, which works in most cases)
+	* "absent" (deletes the file, if it exists)
+	* A string containing the contents of the secretfile ( usually read in from file() or template() )
+	* undef (or just don't include the parameter) - this does nothing and leaves the file undeclared
 
-Set this attribute to "w" while installing RackTables and "r" (for readonly) after installation step 4.
-
-You can also set this to "template" to use the template included with this module.
-
-"absent" setting removes the file.
-
-Defaults to undef, which results in file not being created or permissions not being modified.
+If you set this attribute to "w" while installing RackTables so that the web server can write to the file, remember to later set it to "r" (for readonly) after configuration in step 4.
 
 #####`vhost`
 

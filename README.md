@@ -108,13 +108,13 @@ Make sure there's a DNS entry for your vhost. After 'puppet agent -t' run on tar
 Handles the inc/secret.php file. This can be put to good use during first time installation.
 
 Available settings for this parameter are: 
-	* "w" (writable) 
-	* "r" (readonly) 
-	(these are useful for configuring Racktables manually through the web browser
-	* "template" (uses the included default template, which works in most cases)
-	* "absent" (deletes the file, if it exists)
-	* A string containing the contents of the secretfile ( usually read in from file() or template() )
-	* undef (or just don't include the parameter) - this does nothing and leaves the file undeclared
+
+* "w" (writable) 
+* "r" (readonly) (these are useful for configuring Racktables manually through the web browser
+* "template" (uses the included default template, which works in most cases)
+* "absent" (deletes the file, if it exists)
+* A string containing the contents of the secretfile ( usually read in from file() or template() )
+* undef (or just don't include the parameter) - this does nothing and leaves the file undeclared
 
 If you set this attribute to "w" while installing RackTables so that the web server can write to the file, remember to later set it to "r" (for readonly) after configuration in step 4.
 

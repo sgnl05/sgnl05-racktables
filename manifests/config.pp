@@ -54,7 +54,24 @@ class racktables::config (
       }
     }
 
-    default: { # No action
+    undef: { # No action
+    }
+
+    default: { # Assume the $secretfile is the string content
+      if is_string($secretfile) { 
+        file { "${datadir}/wwwroot/inc/secret.php":
+          ensure  => present,
+          owner   => $apacheuser,
+          mode    => '0400',
+          seluser => 'system_u',
+          selrole => 'object_r',
+          seltype => 'httpd_sys_content_t',
+          require => Vcsrepo[$datadir],
+          content => $secretfile,
+        }
+      } else { 
+        fail("secretfile is not a string")
+      }
     }
 
   }

@@ -1,3 +1,6 @@
+### 0.3.3
+    update: Permit user-determined secret.php contents (#8) by Matt Simmons
+    
 ### 0.3.2 2015-03-10
     update: template file for inc/secret.php complete (#7)
 

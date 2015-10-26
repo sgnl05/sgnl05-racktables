@@ -58,7 +58,7 @@ class racktables::config (
     }
 
     default: { # Assume the $secretfile is the string content
-      if is_string($secretfile) { 
+      if is_string($secretfile) {
         file { "${datadir}/wwwroot/inc/secret.php":
           ensure  => present,
           owner   => $apacheuser,
@@ -69,8 +69,8 @@ class racktables::config (
           require => Vcsrepo[$datadir],
           content => $secretfile,
         }
-      } else { 
-        fail("secretfile is not a string")
+      } else {
+        fail('secretfile is not a string')
       }
     }
 

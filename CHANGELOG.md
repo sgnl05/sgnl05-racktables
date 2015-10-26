@@ -1,4 +1,4 @@
-### 0.3.3
+### 0.3.3 2015-10-26
     update: Permit user-determined secret.php contents (#8) by Matt Simmons
     
 ### 0.3.2 2015-03-10

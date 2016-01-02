@@ -39,11 +39,11 @@ Existing databases, webserver configs and RackTables installations will be repla
 To install RackTables version 0.20.10 with local database and default parameters:
 
 ```puppet
-   class { '::racktables':
-     vhost      => 'racktables.example.com',
-     release    => 'RackTables-0.20.10',
-     install_db => true,
-   }
+class { '::racktables':
+  vhost      => 'racktables.example.com',
+  release    => 'RackTables-0.20.10',
+  install_db => true,
+}
 ```
 
 As soon as Puppet is done installing RackTables, go to the vhost address and append ?module=installer to the URL (Example URL: https://racktables.example.com/?module=installer). From there follow the RackTables installation steps (7 in total).
@@ -58,11 +58,11 @@ These values can be changed by adding parameters 'db_name', 'db_username' and 'd
 Handling the permissions of secret.php at installation step 3 and 4 of can be assisted by Puppet. Use parameter 'secretfile' on the ::racktables class and set it to "writable" on step 3 and "readonly" on step 4. Remember to run "puppet agent -t" on the target server after each of these steps. If you have an existing secretfile or template, the default behavior of 'secretfile' is to accept the contents as a string. For instance: 
 
 ```puppet
-	class { '::racktables':
-		vhost	   => 'racktables.example.com',
-		release    => 'RackTables-0.20.10',
-		secretfile => file('/path/to/file'),
-	}
+class { '::racktables':
+  vost	     => 'racktables.example.com',
+  release    => 'RackTables-0.20.10',
+  secretfile => file('/path/to/file'),
+}
 ```
 		
 
@@ -71,28 +71,28 @@ Handling the permissions of secret.php at installation step 3 and 4 of can be as
 Install RackTables with a new local database:
 
 ```puppet
-   class { '::racktables':
-     vhost       => 'racktables.example.com',
-     release     => 'RackTables-0.20.10',
-     install_db  => true,
-     db_name     => 'racktables',
-     db_username => 'racktables',
-     db_password => 'make_a_strong_password',
-   }
+class { '::racktables':
+  vhost       => 'racktables.example.com',
+  release     => 'RackTables-0.20.10',
+  install_db  => true,
+  db_name     => 'racktables',
+  db_username => 'racktables',
+  db_password => 'make_a_strong_password',
+}
 ```
 
 Install RackTables, using a remote database with existing RackTables data:
 
 ```puppet
-   class { '::racktables':
-     vhost       => 'racktables.example.com',
-     release     => 'RackTables-0.20.10',
-     db_name     => 'example_db_name',
-     db_username => 'example_username',
-     db_password => 'example_password',
-     db_host     => 'database.example.com',
-     secretfile  => 'template',
-   }
+class { '::racktables':
+  vhost       => 'racktables.example.com',
+  release     => 'RackTables-0.20.10',
+  db_name     => 'example_db_name',
+  db_username => 'example_username',
+  db_password => 'example_password',
+  db_host     => 'database.example.com',
+  secretfile  => 'template',
+}
 ```
 
 Make sure there's a DNS entry for your vhost. After 'puppet agent -t' run on target machine, go to the vhost URL and follow the onscreen installation instructions.
@@ -190,23 +190,23 @@ See http://wiki.racktables.org/index.php?title=LDAP for details.
 Defaults to undef. Example class:
 
 ```puppet
-   class { '::racktables':
-     vhost                 => 'racktables.example.com',
-     release               => 'RackTables-0.20.10',
-     user_auth_src         => 'ldap',
-     require_local_account => false,
-     ldap_options          => {
-       'server'               => 'localhost',
-       'domain'               => 'example.com',
-       'search_attr'          => '',
-       'search_dn'            => '',
-       'search_bind_rdn'      => 'NULL',
-       'search_bind_password' => 'NULL',
-       'displayname_attrs'    => '',
-       'options'              => 'array (LDAP_OPT_PROTOCOL_VERSION => 3)',
-       'use_tls'              => '2',
-     }
-   }
+class { '::racktables':
+  vhost                 => 'racktables.example.com',
+  release               => 'RackTables-0.20.10',
+  user_auth_src         => 'ldap',
+  require_local_account => false,
+  ldap_options          => {
+    'server'               => 'localhost',
+    'domain'               => 'example.com',
+    'search_attr'          => '',
+    'search_dn'            => '',
+    'search_bind_rdn'      => 'NULL',
+    'search_bind_password' => 'NULL',
+    'displayname_attrs'    => '',
+    'options'              => 'array (LDAP_OPT_PROTOCOL_VERSION => 3)',
+    'use_tls'              => '2',
+  }
+}
 ```
 
 #####`saml_options`
@@ -216,19 +216,19 @@ See http://wiki.racktables.org/index.php?title=SAML for details.
 Defaults to undef. Example class:
 
 ```puppet
-   class { '::racktables':
-     vhost                 => 'racktables.example.com',
-     release               => 'RackTables-0.20.10',
-     user_auth_src         => 'saml',
-     require_local_account => false,
-     saml_options          => {
-       'simplesamlphp_basedir' => '../simplesaml',
-       'sp_profile'            => 'default-sp',
-       'usernameAttribute'     => 'eduPersonPrincipName',
-       'fullnameAttribute'     => 'fullName',
-       'groupListAttribute'    => 'memberOf',
-     }
-   }
+class { '::racktables':
+  vhost                 => 'racktables.example.com',
+  release               => 'RackTables-0.20.10',
+  user_auth_src         => 'saml',
+  require_local_account => false,
+  saml_options          => {
+    'simplesamlphp_basedir' => '../simplesaml',
+    'sp_profile'            => 'default-sp',
+    'usernameAttribute'     => 'eduPersonPrincipName',
+    'fullnameAttribute'     => 'fullName',
+    'groupListAttribute'    => 'memberOf',
+  }
+}
 ```
 
 #####`helpdesk_banner`

@@ -59,9 +59,9 @@ Handling the permissions of secret.php at installation step 3 and 4 of can be as
 
 ```puppet
 	class { '::racktables':
-		vhost	      => 'racktables.example.com',
-		release     => 'RackTables-0.20.10',
-		secretfile  => file('/path/to/file'),
+		vhost	   => 'racktables.example.com',
+		release    => 'RackTables-0.20.10',
+		secretfile => file('/path/to/file'),
 	}
 ```
 		

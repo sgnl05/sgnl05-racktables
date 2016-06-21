@@ -17,6 +17,10 @@ class racktables::apache (
     default_vhost       => false,
     default_ssl_vhost   => false,
     mpm_module          => 'prefork',
+    # Security enhancements
+    trace_enable     => 'Off',
+    server_signature => 'Off',
+    server_tokens    => 'Prod',
   }
 
   class {'::apache::mod::php': }

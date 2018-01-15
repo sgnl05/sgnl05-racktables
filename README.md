@@ -306,4 +306,4 @@ Should work, but has not been tested.
 
 ###Contributing
 
-Please use the issue tracker (https://github.com/rspiak/sgnl05-racktables/issues) for any type of contribution. 
+Please use the issue tracker (https://github.com/sgnl05/sgnl05-racktables/issues) for any type of contribution. 

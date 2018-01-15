@@ -1,8 +1,9 @@
-### 0.3.3-1 2016-06-21
+### 0.3.4 2018-01-15
     update: harden apache security (#11) by Roman Spiak
+    update: added ssl_chain parameter to apache install
 
 ### 0.3.3 2015-10-26
-    update: Permit user-determined secret.php contents (#8) by Matt Simmons
+    update: permit user-determined secret.php contents (#8) by Matt Simmons
     
 ### 0.3.2 2015-03-10
     update: template file for inc/secret.php complete (#7)
@@ -10,7 +11,7 @@
 ### 0.3.1 2015-03-09
     bugfix: fix warning "Could not look up qualified variable '::apache::default_ssl_cert'; class ::apache has not been evaluated" on Puppet version 3.4.x.
     update: added $user_auth_src and $require_local_account settings to template
-    update: Better parameter validations
+    update: better parameter validations
 
 ### 0.3.0 2015-03-07
     new feature: SSL certificates (#4)

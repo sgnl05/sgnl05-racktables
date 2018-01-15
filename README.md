@@ -60,7 +60,7 @@ Handling the permissions of secret.php at installation step 3 and 4 of can be as
 ```puppet
 class { '::racktables':
   vost	     => 'racktables.example.com',
-  release    => 'RackTables-0.20.10',
+  release    => 'RackTables-0.20.14',
   secretfile => file('/path/to/file'),
 }
 ```
@@ -73,7 +73,7 @@ Install RackTables with a new local database:
 ```puppet
 class { '::racktables':
   vhost       => 'racktables.example.com',
-  release     => 'RackTables-0.20.10',
+  release     => 'RackTables-0.20.14',
   install_db  => true,
   db_name     => 'racktables',
   db_username => 'racktables',
@@ -86,7 +86,7 @@ Install RackTables, using a remote database with existing RackTables data:
 ```puppet
 class { '::racktables':
   vhost       => 'racktables.example.com',
-  release     => 'RackTables-0.20.10',
+  release     => 'RackTables-0.20.14',
   db_name     => 'example_db_name',
   db_username => 'example_username',
   db_password => 'example_password',
@@ -192,7 +192,7 @@ Defaults to undef. Example class:
 ```puppet
 class { '::racktables':
   vhost                 => 'racktables.example.com',
-  release               => 'RackTables-0.20.10',
+  release               => 'RackTables-0.20.14',
   user_auth_src         => 'ldap',
   require_local_account => false,
   ldap_options          => {
@@ -218,7 +218,7 @@ Defaults to undef. Example class:
 ```puppet
 class { '::racktables':
   vhost                 => 'racktables.example.com',
-  release               => 'RackTables-0.20.10',
+  release               => 'RackTables-0.20.14',
   user_auth_src         => 'saml',
   require_local_account => false,
   saml_options          => {
@@ -249,6 +249,11 @@ Defaults to undef.
 #####`ssl_key`
 
 String. Specifies the location of the SSL key.
+Defaults to undef.
+
+#####`ssl_chain`
+
+String. Specifies the location of the SSL chain.
 Defaults to undef.
 
 #####`apacheuser`
@@ -296,14 +301,8 @@ Defaults to 'https://github.com/RackTables/racktables.git'.
 
 * `racktables::params`: Default parameters
 
-## Limitations
-
-#####RHEL 7
-
-Should work, but has not been tested.
-
 ## Development
 
 ###Contributing
 
-Please use the issue tracker (https://github.com/sgnl05/sgnl05-racktables/issues) for any type of contribution. 
+Please use pull requests (https://github.com/sgnl05/sgnl05-racktables/pulls) for any type of contribution.

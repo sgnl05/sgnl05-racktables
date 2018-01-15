@@ -54,6 +54,7 @@ class racktables (
   $helpdesk_banner       = undef,
   $ssl_cert              = undef,
   $ssl_key               = undef,
+  $ssl_chain             = undef,
   $apacheuser            = $racktables::params::apacheuser,
   $datadir               = $racktables::params::datadir,
   $packages              = $racktables::params::packages,

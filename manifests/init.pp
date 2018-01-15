@@ -34,7 +34,7 @@ class racktables (
   $ssl_cert              = undef,
   $ssl_key               = undef,
   $ssl_chain             = undef,
-  $templatefile          = undef,
+  $templatefile          = $racktables::params::templatefile,
   $apacheuser            = $racktables::params::apacheuser,
   $datadir               = $racktables::params::datadir,
   $packages              = $racktables::params::packages,

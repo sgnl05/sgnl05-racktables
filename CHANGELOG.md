@@ -1,4 +1,4 @@
-### 0.4.0 2018-01-15
+### 0.4.1 2018-01-15
     update: secretfile set to 'template' is now customisable through the templatefile parameter
     update: added templatefile parameter
 

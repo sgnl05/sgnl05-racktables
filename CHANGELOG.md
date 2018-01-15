@@ -1,5 +1,5 @@
 ### 0.3.3-1 2016-06-21
-    update: harden apache security (#9) by Roman Spiak
+    update: harden apache security (#11) by Roman Spiak
 
 ### 0.3.3 2015-10-26
     update: Permit user-determined secret.php contents (#8) by Matt Simmons

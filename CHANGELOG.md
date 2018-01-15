@@ -1,3 +1,9 @@
+### 0.4.0 2018-01-15
+    update: secretfile set to 'template' is now customisable through the templatefile parameter
+    update: added templatefile parameter
+
+    deprication warning: secretfile param will be renamed to secretmode in next version
+
 ### 0.3.4 2018-01-15
     update: harden apache security (#11) by Roman Spiak
     update: added ssl_chain parameter to apache install

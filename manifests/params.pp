@@ -8,6 +8,7 @@ class racktables::params {
   $db_host               = 'localhost'
   $user_auth_src         = 'database'
   $require_local_account = true
+  $templatefile          = 'racktables/secret.erb'
   $datadir               = '/usr/local/share/RackTables'
   $repoensure            = 'present'
   $vcsprovider           = 'git'

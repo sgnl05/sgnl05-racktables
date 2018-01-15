@@ -1,11 +1,13 @@
 # Installs RackTables
 class racktables::config (
-  $secretfile = $::racktables::secretfile,
-  $apacheuser = $::racktables::apacheuser,
-  $datadir    = $::racktables::datadir,
+  $secretfile   = $::racktables::secretfile,
+  $templatefile = $::racktables::templatefile,
+  $apacheuser   = $::racktables::apacheuser,
+  $datadir      = $::racktables::datadir,
 ) {
 
   validate_string($secretfile)
+  validate_string($templatefile)
   validate_string($apacheuser)
   validate_string($datadir)
 
@@ -19,7 +21,7 @@ class racktables::config (
         seluser => 'system_u',
         selrole => 'object_r',
         seltype => 'httpd_sys_content_t',
-        content => template('racktables/secret.erb'),
+        content => template($templatefile),
         require => Vcsrepo[$datadir],
       }
     }

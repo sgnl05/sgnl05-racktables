@@ -111,12 +111,19 @@ Available settings for this parameter are:
 
 * "w" (writable) 
 * "r" (readonly) (these are useful for configuring Racktables manually through the web browser
-* "template" (uses the included default template, which works in most cases)
+* "template" (uses the included default template, or a custome one set through the `templatefile` parameter)
 * "absent" (deletes the file, if it exists)
-* A string containing the contents of the secretfile ( usually read in from file() or template() )
+* A string containing the contents of the secretfile
 * undef (or just don't include the parameter) - this does nothing and leaves the file undeclared
 
 If you set this attribute to "w" while installing RackTables so that the web server can write to the file, remember to later set it to "r" (for readonly) after configuration in step 4.
+
+DEPRICATION WARNING: This parameter will be renamed to 'secretmode' in the next release of this module.
+
+#####`templatefile`
+
+String. Sets the template file to use for secret.php. The `secretfile` parameter must be set to 'template' for this to work.
+Defaults to 'racktables/secret.erb'.
 
 #####`vhost`
 

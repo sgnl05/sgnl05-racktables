@@ -1,10 +1,10 @@
 # Installs apache and racktables vhost
 class racktables::apache (
-  $vhost      = $::racktables::vhost,
-  $ssl_cert   = $::racktables::ssl_cert,
-  $ssl_key    = $::racktables::ssl_key,
-  $ssl_chain  = $::racktables::ssl_chain,
-  $datadir    = $::racktables::datadir,
+  $vhost     = $::racktables::vhost,
+  $ssl_cert  = $::racktables::ssl_cert,
+  $ssl_key   = $::racktables::ssl_key,
+  $ssl_chain = $::racktables::ssl_chain,
+  $datadir   = $::racktables::datadir,
 ) {
 
   validate_string($vhost)
@@ -18,10 +18,9 @@ class racktables::apache (
     default_vhost       => false,
     default_ssl_vhost   => false,
     mpm_module          => 'prefork',
-    # Security enhancements
-    trace_enable     => 'Off',
-    server_signature => 'Off',
-    server_tokens    => 'Prod',
+    trace_enable        => 'Off',
+    server_signature    => 'Off',
+    server_tokens       => 'Prod',
   }
 
   class {'::apache::mod::php': }

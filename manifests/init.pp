@@ -69,10 +69,11 @@ class racktables (
   }
 
   class { '::racktables::apache':
-    vhost    => $vhost,
-    ssl_cert => $ssl_cert,
-    ssl_key  => $ssl_key,
-    datadir  => $datadir,
+    vhost     => $vhost,
+    ssl_cert  => $ssl_cert,
+    ssl_key   => $ssl_key,
+    ssl_chain => $ssl_chain,
+    datadir   => $datadir,
   }
 
   class { '::racktables::install':

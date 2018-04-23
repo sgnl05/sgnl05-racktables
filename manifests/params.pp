@@ -6,6 +6,7 @@ class racktables::params {
   $db_password           = 'racktables_pass'
   $db_name               = 'racktables_db'
   $db_host               = 'localhost'
+  $db_grant              = ['ALL']
   $user_auth_src         = 'database'
   $require_local_account = true
   $templatefile          = 'racktables/secret.erb'

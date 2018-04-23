@@ -25,6 +25,7 @@ class racktables (
   $db_name               = $racktables::params::db_name,
   $db_host               = $racktables::params::db_host,
   $db_rootpw             = undef,
+  $db_grant              = $racktables::params::db_grant,
   $user_auth_src         = $racktables::params::user_auth_src,
   $require_local_account = $racktables::params::require_local_account,
   $pdo_bufsize           = undef,
@@ -48,6 +49,7 @@ class racktables (
   validate_string($db_password)
   validate_string($db_name)
   validate_string($db_host)
+  validate_array($db_grant)
   validate_re($user_auth_src, '^(database|httpd|ldap|saml)$',
   "${user_auth_src} is not supported for user_auth_src.
   Allowed values are 'database', 'http', 'ldap' and 'saml'.")
@@ -65,6 +67,7 @@ class racktables (
       db_name     => $db_name,
       db_host     => $db_host,
       db_rootpw   => $db_rootpw,
+      db_grant    => $db_grant,
     }
   }
 

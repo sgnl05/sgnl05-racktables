@@ -5,6 +5,7 @@ class racktables::mysql (
   $db_name     = $::racktables::db_name,
   $db_host     = $::racktables::db_host,
   $db_rootpw   = $::racktables::db_rootpw,
+  $db_grant    = $::racktables::db_grant,
 ) {
 
   validate_string($db_username)
@@ -12,6 +13,7 @@ class racktables::mysql (
   validate_string($db_name)
   validate_string($db_host)
   validate_string($db_rootpw)
+  validate_array($db_grant)
 
   class { '::mysql::server':
     root_password => $db_rootpw,
@@ -23,7 +25,7 @@ class racktables::mysql (
     host     => $db_host,
     charset  => 'utf8',
     collate  => 'utf8_unicode_ci',
-    grant    => ['ALL'],
+    grant    => $db_grant,
   }
 
 }

@@ -23,7 +23,7 @@ RackTables is nifty and robust solution for datacenter and server room asset man
 Use this module to install a new instance of RackTables. The module will also install Apache, PHP, MySQL (optional) and some other dependencies for RackTables (php packages mostly).
 
 WARNING:
-Use this module on NEW servers! 
+Use this module on NEW servers!
 Existing databases, webserver configs and RackTables installations will be replaced or purged.
 
 ## Setup
@@ -52,10 +52,11 @@ Default database settings are:
 * database: racktables_db
 * username: racktables_user
 * password: racktables_pass
+* grant: ALL
 
-These values can be changed by adding parameters 'db_name', 'db_username' and 'db_password' to the ::racktables class (See more [examples](#examples)).
+These values can be changed by adding parameters 'db_name', 'db_username', 'db_password' and 'db_grant' to the ::racktables class (See more [examples](#examples)).
 
-Handling the permissions of secret.php at installation step 3 and 4 of can be assisted by Puppet. Use parameter 'secretfile' on the ::racktables class and set it to "writable" on step 3 and "readonly" on step 4. Remember to run "puppet agent -t" on the target server after each of these steps. If you have an existing secretfile or template, the default behavior of 'secretfile' is to accept the contents as a string. For instance: 
+Handling the permissions of secret.php at installation step 3 and 4 of can be assisted by Puppet. Use parameter 'secretfile' on the ::racktables class and set it to "writable" on step 3 and "readonly" on step 4. Remember to run "puppet agent -t" on the target server after each of these steps. If you have an existing secretfile or template, the default behavior of 'secretfile' is to accept the contents as a string. For instance:
 
 ```puppet
 class { '::racktables':
@@ -64,7 +65,7 @@ class { '::racktables':
   secretfile => file('/path/to/file'),
 }
 ```
-		
+
 
 #### Examples
 
@@ -107,9 +108,9 @@ Make sure there's a DNS entry for your vhost. After 'puppet agent -t' run on tar
 
 Handles the inc/secret.php file. This can be put to good use during first time installation.
 
-Available settings for this parameter are: 
+Available settings for this parameter are:
 
-* "w" (writable) 
+* "w" (writable)
 * "r" (readonly) (these are useful for configuring Racktables manually through the web browser
 * "template" (uses the included default template, or a custome one set through the `templatefile` parameter)
 * "absent" (deletes the file, if it exists)
@@ -139,7 +140,7 @@ Defaults to 'undef', which results in the default repo being downloaded. After f
 
 #####`install_db`
 
-Boolean. Set to 'true' to make this module install a mysql database on the target server. 
+Boolean. Set to 'true' to make this module install a mysql database on the target server.
 Defaults to 'false'.
 
 #####`db_username`
@@ -150,7 +151,7 @@ Defaults to 'racktables_user'.
 #####`db_password`
 
 String. Sets the password for the user defined in param "mysqluser".
-Defaults to 'racktables_pass'. 
+Defaults to 'racktables_pass'.
 
 #####`db_name`
 
@@ -166,6 +167,11 @@ Defaults to 'localhost'.
 
 String. Sets the root password on MySQL.
 Defaults to undef.
+
+#####`db_grant`
+
+Array. Sets grant permissions for the user defined in param "db_username".
+Defaults to ['ALL'].
 
 #####`user_auth_src`
 
@@ -184,7 +190,7 @@ Defaults to true.
 
 #####`pdo_bufsize`
 
-String. "$pdo_bufsize" setting in inc/secret.php. 
+String. "$pdo_bufsize" setting in inc/secret.php.
 Setting MySQL client buffer size may be required to make downloading work for
 larger files, but it does not work with mysqlnd.
 Example: '50 * 1024 * 1024'

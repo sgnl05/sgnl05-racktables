@@ -140,17 +140,17 @@ Defaults to 'undef', which results in the default repo being downloaded. After f
 
 #####`install_db`
 
-Boolean. Set to 'true' to make this module install a mysql database on the target server.
+Boolean. Set to 'true' to make this module install a MySQL database on the target server.
 Defaults to 'false'.
 
 #####`db_username`
 
-String. Sets the mysql username for the racktables database.
+String. Sets the MySQL username for the racktables database.
 Defaults to 'racktables_user'.
 
 #####`db_password`
 
-String. Sets the password for the user defined in param "mysqluser".
+String. Sets the password for the user defined in param "db_username".
 Defaults to 'racktables_pass'.
 
 #####`db_name`
